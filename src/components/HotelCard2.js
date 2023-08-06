@@ -20,7 +20,7 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate}) {
       <p className="card-text">{hotel.description}</p>
       <p className="card-text">Price: {hotel.price}</p>
       <p className="card-text">Price for {numberOfDays} Days: ₹{total}</p>
-      <button className="btn btn-primary">{buttontxt}</button>
+      <button className="btn btn-success">{buttontxt}</button>
     </div>
   </div>
   )

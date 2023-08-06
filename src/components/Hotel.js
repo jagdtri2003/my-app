@@ -75,12 +75,12 @@ export default function Hotel() {
         <form onSubmit={handleSubmit} className="my-3 mx-2">
         <div className="form-row">
           <div className="col-md-7 mb-3">
-            <label htmlFor="inputDestination">Hotel Name</label>
+            <label htmlFor="inputDestination">Hotel Name or Location</label>
             <input
               type="text"
               className="form-control"
               id="inputDestination"
-              placeholder="Hotel Name"
+              placeholder="Hotel Name or Location"
               value={searchQuery}
               onChange={handleSearchChange}
               required 

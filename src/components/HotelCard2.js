@@ -9,7 +9,6 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate}) {
     // Assuming hotel.price is in '₹XXXX' format
     const pricePerNight = parseInt(hotel.price.replace(/\D/g, ''));
     const total = pricePerNight * numberOfDays;
-    // setTotalPrice('₹' + total);
 
 
   return (

@@ -57,19 +57,23 @@ export default function Hotel() {
       // setShowHotelList(false);
     };
 
-    const handleCheckInDateChange = (event) => {
-      const selectedCheckInDate = event.target.value;
-      const maxCheckInDate = new Date(checkOutDate);
-      maxCheckInDate.setDate(maxCheckInDate.getDate() - 1);
+    // const handleCheckInDateChange = (event) => {
+    //   const selectedCheckInDate = event.target.value;
+    //   const maxCheckInDate = new Date(checkOutDate);
+    //   maxCheckInDate.setDate(maxCheckInDate.getDate() - 1);
   
-      if (selectedCheckInDate > maxCheckInDate.toISOString().slice(0, 10)) {
-        // If the selected check-out date is before the minimum allowed date,
-        // update the check-out date to the minimum allowed date.
-        setCheckInDate(maxCheckInDate.toISOString().slice(0, 10));
-      } else {
-        setCheckInDate(selectedCheckInDate);
-      }
-    };
+    //   if (selectedCheckInDate > maxCheckInDate.toISOString().slice(0, 10)) {
+    //     // If the selected check-out date is before the minimum allowed date,
+    //     // update the check-out date to the minimum allowed date.
+    //     setCheckInDate(maxCheckInDate.toISOString().slice(0, 10));
+    //   } else {
+    //     setCheckInDate(selectedCheckInDate);
+    //   }
+    // };
+
+    const handleCheckInDateChange = (event) => {
+      setCheckInDate(event.target.value)
+    }
     
     const handleBookNow = (hotel) => {
       setSelectedHotel(hotel);

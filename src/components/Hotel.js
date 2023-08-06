@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 
+
 const handleSubmit = () => {
     console.log('Form submitted!')
 }
@@ -29,7 +30,7 @@ const hotels = [
   // Add more hotel objects as needed
 ];
 
-const HotelCard = ({ hotel }) => {
+const HotelCard = ({ hotel,onBookNow }) => {
     return (
       <div className="card mb-3">
         <div className="card-body">
@@ -37,7 +38,7 @@ const HotelCard = ({ hotel }) => {
           <h6 className="card-subtitle mb-2 text-muted">{hotel.location}</h6>
           <p className="card-text">{hotel.description}</p>
           <p className="card-text">Price: {hotel.price}</p>
-          <button className="btn btn-primary">Book Now</button>
+          <button className="btn btn-primary" onClick={() => onBookNow(hotel)}>Book Now</button>
         </div>
       </div>
     );
@@ -48,21 +49,26 @@ const HotelCard = ({ hotel }) => {
 
 export default function Hotel() {
 
-    
-const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
-};
-
     const [searchQuery, setSearchQuery] = useState('');
+    const [selectedHotel, setSelectedHotel] = useState(null);
   
     const filteredHotels = hotels.filter((hotel) =>
       hotel.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
+  
+    const handleSearchChange = (event) => {
+      setSearchQuery(event.target.value);
+      setSelectedHotel(null); // Reset selectedHotel when the user searches again
+    };
+  
+    const handleBookNow = (hotel) => {
+      setSelectedHotel(hotel);
+    };
   return (
     <>
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="my-3 mx-2">
     <div className="form-row">
-      <div className="col-md-6 mb-3">
+      <div className="col-md-5 mb-3">
         <label htmlFor="inputDestination">Destination</label>
         <input
           type="text"
@@ -74,7 +80,7 @@ const handleSearchChange = (event) => {
           required 
         />
       </div>
-      <div className="col-md-6 mb-3">
+      <div className="col-md-5 mb-3">
         <label htmlFor="inputCheckInDate">Check-in Date</label>
         <input
           type="date"
@@ -85,7 +91,7 @@ const handleSearchChange = (event) => {
       </div>
     </div>
     <div className="form-row">
-      <div className="col-md-6 mb-3">
+      <div className="col-md-5 mb-3">
         <label htmlFor="inputCheckOutDate">Check-out Date</label>
         <input
           type="date"
@@ -94,7 +100,7 @@ const handleSearchChange = (event) => {
           required
         />
       </div>
-      <div className="col-md-6 mb-3">
+      <div className="col-md-5 mb-3">
         <label htmlFor="inputGuestCount">Number of Guests</label>
         <input
           type="number"
@@ -106,7 +112,7 @@ const handleSearchChange = (event) => {
       </div>
     </div>
     <div className="form-row">
-      <div className="col-md-6 mb-3">
+      <div className="col-md-5 mb-3">
         <label htmlFor="inputRoomType">Room Type</label>
         <select
           className="form-control"
@@ -120,18 +126,8 @@ const handleSearchChange = (event) => {
         </select>
       </div>
     </div>
-    <div className="form-row">
-      <div className="col-md-6 mb-3">
-        <label htmlFor="inputEmail">Email</label>
-        <input
-          type="email"
-          className="form-control"
-          id="inputEmail"
-          placeholder="example@example.com"
-          required
-        />
-      </div>
-      <div className="col-md-6 mb-3">
+    <div className="form-col">
+      <div className="col-md-5 mb-3">
         <label htmlFor="inputPhone">Phone Number</label>
         <input
           type="tel"
@@ -140,18 +136,6 @@ const handleSearchChange = (event) => {
           placeholder="Enter phone number"
           required
         />
-      </div>
-    </div>
-    <div className="form-group">
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          id="inputBreakfast"
-        />
-        <label className="form-check-label" htmlFor="inputBreakfast">
-          Include Breakfast
-        </label>
       </div>
     </div>
     <button type="submit" className="btn btn-primary my-3">

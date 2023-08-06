@@ -1,12 +1,65 @@
-import React from 'react'
-
+import React,{useState} from 'react'
 
 const handleSubmit = () => {
     console.log('Form submitted!')
-  }
+}
+
+const hotels = [
+  {
+    id: 1,
+    name: 'Hotel A',
+    location: 'City X',
+    price: '$100',
+    description: 'A beautiful hotel in the heart of City X.',
+  },
+  {
+    id: 2,
+    name: 'Hotel B',
+    location: 'City Y',
+    price: '$150',
+    description: 'A luxury hotel with stunning views in City Y.',
+  },
+  {
+    id: 3,
+    name: 'Hotel C',
+    location: 'City Z',
+    price: '$80',
+    description: 'An affordable hotel with great amenities in City Z.',
+  },
+  // Add more hotel objects as needed
+];
+
+const HotelCard = ({ hotel }) => {
+    return (
+      <div className="card mb-3">
+        <div className="card-body">
+          <h5 className="card-title">{hotel.name}</h5>
+          <h6 className="card-subtitle mb-2 text-muted">{hotel.location}</h6>
+          <p className="card-text">{hotel.description}</p>
+          <p className="card-text">Price: {hotel.price}</p>
+          <button className="btn btn-primary">Book Now</button>
+        </div>
+      </div>
+    );
+};
+
+
+
 
 export default function Hotel() {
+
+    
+const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+};
+
+    const [searchQuery, setSearchQuery] = useState('');
+  
+    const filteredHotels = hotels.filter((hotel) =>
+      hotel.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
   return (
+    <>
     <form onSubmit={handleSubmit}>
     <div className="form-row">
       <div className="col-md-6 mb-3">
@@ -16,7 +69,9 @@ export default function Hotel() {
           className="form-control"
           id="inputDestination"
           placeholder="City or Hotel Name"
-          required
+          value={searchQuery}
+          onChange={handleSearchChange}
+          required 
         />
       </div>
       <div className="col-md-6 mb-3">
@@ -103,6 +158,21 @@ export default function Hotel() {
       Book Now
     </button>
   </form>
+  <div className="mt-3">
+        <h3>List of Hotels</h3>
+        {filteredHotels.length > 0 ? (
+          <div className="row">
+            {filteredHotels.map((hotel) => (
+              <div key={hotel.id} className="col-md-4">
+                <HotelCard hotel={hotel} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>No hotels found. Please try a different search.</p>
+        )}
+    </div>
+  </>
   )
 }
 

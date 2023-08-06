@@ -58,16 +58,37 @@ export default function Hotel() {
     };
 
     const handleCheckInDateChange = (event) => {
-      setCheckInDate(event.target.value);
-    };
+      const selectedCheckInDate = event.target.value;
+      const maxCheckInDate = new Date(checkOutDate);
+      maxCheckInDate.setDate(maxCheckInDate.getDate() - 1);
   
-    const handleCheckOutDateChange = (event) => {
-      setCheckOutDate(event.target.value);
+      if (selectedCheckInDate > maxCheckInDate.toISOString().slice(0, 10)) {
+        // If the selected check-out date is before the minimum allowed date,
+        // update the check-out date to the minimum allowed date.
+        setCheckInDate(maxCheckInDate.toISOString().slice(0, 10));
+      } else {
+        setCheckInDate(selectedCheckInDate);
+      }
     };
-  
+    
     const handleBookNow = (hotel) => {
       setSelectedHotel(hotel);
     };
+
+    const handleCheckOutDateChange = (event) => {
+      const selectedCheckOutDate = event.target.value;
+      const minimumCheckOutDate = new Date(checkInDate);
+      minimumCheckOutDate.setDate(minimumCheckOutDate.getDate() + 1);
+  
+      if (selectedCheckOutDate < minimumCheckOutDate.toISOString().slice(0, 10)) {
+        // If the selected check-out date is before the minimum allowed date,
+        // update the check-out date to the minimum allowed date.
+        setCheckOutDate(minimumCheckOutDate.toISOString().slice(0, 10));
+      } else {
+        setCheckOutDate(selectedCheckOutDate);
+      }
+    };
+
   return (
     <>
     <div className="row">
@@ -92,6 +113,7 @@ export default function Hotel() {
               type="date"
               className="form-control"
               id="inputCheckInDate"
+              value={checkInDate}
               onChange={handleCheckInDateChange}
               required
             />
@@ -104,6 +126,7 @@ export default function Hotel() {
               type="date"
               className="form-control"
               id="inputCheckOutDate"
+              value={checkOutDate}
               onChange={handleCheckOutDateChange}
               required
             />

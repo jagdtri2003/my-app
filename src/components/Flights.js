@@ -1,20 +1,64 @@
-import React from 'react'
+import React,{useState} from 'react'
+import FlightCard2 from './FlightCard2';
 
 // https://script.google.com/macros/s/AKfycbzuSXWhXBXFdnohjMteGh24ZeyA8yhWqE-Z6_3og1YZWq7JjypTcucE2t_-8AwooTyxzA/exec?frm=DElhi&to=Mumbai
 
 export default function Flights() {
+
+
+  const [showFlightList,setShowFlightList] =useState(false);
+  const [flights, setFlights] = useState([]);
+  const [departureCity, setDepartureCity] = useState('');
+  const [destinationCity, setDestinationCity] = useState('');
+  const [selectedFlight,setSelectedFlight]=useState(null);
+  const [passengerCount,setPassengerCount]=useState(1);
+
+  const searchFlights = async () => {
+    try {
+      const response = await fetch(
+        `https://script.google.com/macros/s/AKfycbye6Yi_bm6nPVgZMe3q8zS4gq2LNSuaVgZyNjQ6z3vQl5HjjrMCYHYSqxqsXFnms587mg/exec?frm=${departureCity}&to=${destinationCity}`
+      );
+      const data = await response.json();
+      setFlights(data.data);
+      setShowFlightList(true);
+    } catch (error) {
+      console.error('Error fetching hotels:', error);
+    }
+  };
+
+
+  const FlightCard = ({ flight }) => {
+
+    return (
+      <div className="card mb-3">
+        <div className="card-body">
+          <h5 className="card-title">{flight.name} - {flight.flight_number}</h5>
+          <p className="card-text">Departure: {flight.dep_city}</p>
+          <p className="card-text">Destination: {flight.arrival_city}</p>
+          <p className="card-text">Departure Time: {flight.dep_time}</p>
+          <p className="card-text">Price: ₹{flight.price}</p>
+          <button className="btn btn-primary" onClick={() => setSelectedFlight(flight)}>Select Flight</button>
+        </div>
+      </div>
+    );
+  };
+
+
   return (
+    <>
     <div className='row'>
         <div className="col mt-2">
             <form>
                 <div class="form-row">
                     <div class="mr-2 mb-3">
                         <label for="inputFrom">From</label>
-                        <input type="text" class="form-control" id="inputFrom" placeholder="Departure City" required/>
+                        <input type="text" class="form-control" id="inputFrom" placeholder="Departure City"
+                        value={departureCity}
+                        onChange={(e) => setDepartureCity(e.target.value)} required/>
                     </div>
                     <div class="mr-2 mb-3">
                         <label for="inputTo">To</label>
-                        <input type="text" class="form-control" id="inputTo" placeholder="Destination City" required/>
+                        <input type="text" class="form-control" id="inputTo" placeholder="Destination City" value={destinationCity} onChange={(e) => setDestinationCity(e.target.value)}  required/>
                     </div>
                 </div>
                 <div class="form-row">
@@ -26,7 +70,7 @@ export default function Flights() {
                 <div class="form-row">
                     <div class="mr-2 mb-3">
                         <label for="inputPassengerCount">Number of Passengers</label>
-                        <input type="number" class="form-control" id="inputPassengerCount" min="1" required/>
+                        <input type="number" class="form-control" id="inputPassengerCount" min="1" value={passengerCount} onChange={(e)=>setPassengerCount(e.target.value)} required/>
                     </div>
                     <div class="mr-2 mb-3">
                         <label for="inputCabinClass">Cabin Class</label>
@@ -37,10 +81,34 @@ export default function Flights() {
                         </select>
                     </div>
                 </div>
-                <button class="btn btn-primary" type="submit">Search Flights</button>
+                <button class="btn btn-primary" type="button" onClick={searchFlights}>Search Flights</button>
             </form>
         </div>
-        <div className="col mt-2 ms-2">Selected Flight</div>
+        <div className="col my-3 ms-1">
+              {selectedFlight && (
+                <div>
+                  <h3>&nbsp;Selected Flight</h3>
+                  <FlightCard2 flight={selectedFlight} passengerCount={passengerCount} />
+                </div>
+              )}
+        </div>
     </div>
+      {showFlightList && (
+        <div className="mt-4 mx-1">
+          <h3>List of Available Flights</h3>
+          {flights.length > 0 ? (
+            <div className="row">
+              {flights.map((flight) => (
+                <div key={flight.id} className="col-md-4 my-2">
+                  <FlightCard flight={flight}/>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No flights found. Please try a different search.</p>
+          )}
+        </div>
+      )}
+      </>
   )
 }

@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react'
 import HotelCard2 from './HotelCard2';
-// https://script.google.com/macros/s/AKfycbwlJeUVuoBzkZPBC_CfjvMq1U9IlE327tYPHh0jE5l7f362PiYfDbYe2dGdPtwWbS3sJQ/exec?query=D
 
 
 export default function Hotel() {
@@ -185,7 +184,7 @@ export default function Hotel() {
                   <HotelCard2 hotel={selectedHotel} buttontxt="Pay Now" checkInDate={checkInDate} checkOutDate={checkOutDate} />
                 </div>
               )}
-          </div>
+    </div>
   </div>
   {showHotelList && (
         <div className="mt-3">

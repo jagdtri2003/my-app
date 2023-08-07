@@ -1,19 +1,29 @@
 import './App.css';
 import MainCard from './components/MainCard';
-import Modal from './components/Modal';
 import Navbar from './components/Navbar';
-import Flights from './components/Flights';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import About from './components/About';
+import ContactUs from './components/ContactUs';
+import Footer from './components/Footer';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
 
 function App() {
   return (
-    <>
-    <Navbar title="TravelKro"/>
-    <div className="container my-4">
-      <MainCard flights={<Flights/>}/>
-    </div>
-    </>
+    <Router>
+      <>
+        <Navbar title="TravelKro" />
+        <div className="container my-4">
+          <Routes>
+            <Route path="/" element={<MainCard />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<ContactUs />} />
+          </Routes>
+        </div>
+        <Footer/>
+      </>
+    </Router>
   );
 }
 

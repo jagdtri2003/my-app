@@ -1,8 +1,6 @@
 import React,{useState} from 'react'
 import FlightCard2 from './FlightCard2';
 
-// https://script.google.com/macros/s/AKfycbzuSXWhXBXFdnohjMteGh24ZeyA8yhWqE-Z6_3og1YZWq7JjypTcucE2t_-8AwooTyxzA/exec?frm=DElhi&to=Mumbai
-
 export default function Flights() {
 
 

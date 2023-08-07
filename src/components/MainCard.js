@@ -1,7 +1,8 @@
 import React from 'react'
+import Flights from './Flights'
 import Hotel from './Hotel'
 
-export default function MainCard(props) {
+export default function MainCard() {
   return (
     <>
     <ul className="nav nav-tabs" id="myTab" role="tablist">
@@ -16,7 +17,7 @@ export default function MainCard(props) {
     </li>
     </ul>
     <div className="tab-content my-2" id="myTabContent">
-    <div className="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabIndex="0">{props.flights}</div>
+    <div className="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabIndex="0"><Flights/></div>
     <div className="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabIndex="0">{<Hotel/>}</div>
     <div className="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabIndex="0">Car Rent</div>
     </div>

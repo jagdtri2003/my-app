@@ -10,7 +10,7 @@ function App() {
   return (
     <>
     <Navbar title="TravelKro"/>
-    <div className="container my-4 mx-6">
+    <div className="container my-4">
       <MainCard flights={<Flights/>}/>
     </div>
     </>

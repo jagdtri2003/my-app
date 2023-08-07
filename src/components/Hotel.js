@@ -97,9 +97,9 @@ export default function Hotel() {
     <>
     <div className="row">
       <div className='col'>
-        <form onSubmit={handleSubmit} className="my-3 mx-2">
+        <form onSubmit={handleSubmit} className="my-2">
         <div className="form-row">
-          <div className="col-md-7 mb-3">
+          <div className="mb-3">
             <label htmlFor="inputDestination">Hotel Name or Location</label>
             <input
               type="text"
@@ -111,7 +111,7 @@ export default function Hotel() {
               required 
             />
           </div>
-          <div className="col-md-7 mb-3">
+          <div className=" mb-3">
             <label htmlFor="inputCheckInDate">Check-in Date</label>
             <input
               type="date"
@@ -124,7 +124,7 @@ export default function Hotel() {
           </div>
         </div>
         <div className="form-row">
-          <div className="col-md-7 mb-3">
+          <div className=" mb-3">
             <label htmlFor="inputCheckOutDate">Check-out Date</label>
             <input
               type="date"
@@ -135,7 +135,7 @@ export default function Hotel() {
               required
             />
           </div>
-          <div className="col-md-7 mb-3">
+          <div className=" mb-3">
             <label htmlFor="inputGuestCount">Number of Guests</label>
             <input
               type="number"
@@ -147,7 +147,7 @@ export default function Hotel() {
           </div>
         </div>
         <div className="form-row">
-          <div className="col-md-7 mb-3">
+          <div className=" mb-3">
             <label htmlFor="inputRoomType">Room Type</label>
             <select
               className="form-control"
@@ -162,7 +162,7 @@ export default function Hotel() {
           </div>
         </div>
         <div className="form-col">
-          <div className="col-md-7 mb-3">
+          <div className=" mb-3">
             <label htmlFor="inputPhone">Phone Number</label>
             <input
               type="tel"
@@ -178,10 +178,10 @@ export default function Hotel() {
         </button>
       </form>
     </div>
-    <div className="col mx-2 my-3">
+    <div className="col my-3 ms-1">
               {selectedHotel && (
                 <div>
-                  <h3>Selected Hotel</h3>
+                  <h3>&nbsp;Selected Hotel</h3>
                   <HotelCard2 hotel={selectedHotel} buttontxt="Pay Now" checkInDate={checkInDate} checkOutDate={checkOutDate} />
                 </div>
               )}

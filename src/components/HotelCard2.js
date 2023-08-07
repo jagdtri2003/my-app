@@ -1,4 +1,5 @@
-import React from 'react'
+import React ,{useState} from 'react'
+import Modal from './Modal';
 
 export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate}) {
 
@@ -6,10 +7,18 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate}) {
     const endDate = new Date(checkOutDate);
     const numberOfDays = (endDate - startDate) / (1000 * 3600 * 24); // Calculate the number of days
 
+    // const [showModal, setShowModal] = useState(false);
+
     // Assuming hotel.price is in '₹XXXX' format
     const pricePerNight = parseInt(hotel.price.replace(/\D/g, ''));
     const total = pricePerNight * numberOfDays;
 
+    // const handlePayNowClick = () => {
+    //   setShowModal(true);
+    // }
+    // const handleCloseModal = () => {
+    //   setShowModal(false);
+    // };
 
   return (
     <div className="card mb-3">
@@ -18,9 +27,12 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate}) {
       <h6 className="card-subtitle mb-2 text-muted">{hotel.location}</h6>
       <p className="card-text">{hotel.description}</p>
       <p className="card-text">Price: {hotel.price}</p>
-      <p className="card-text">Price for {numberOfDays} Days: ₹{total}</p>
+      <p className="card-text">Price for {numberOfDays} Days:<strong>₹{total}</strong></p>
       <button className="btn btn-success">{buttontxt}</button>
     </div>
+    {/* {
+      showModal && <Modal showModal={showModal} closeModal={handleCloseModal} />
+    } */}
   </div>
   )
 }

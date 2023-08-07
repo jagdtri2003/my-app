@@ -11,3 +11,34 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+/* Custom CSS */
+/* .modal {
+  display: none;
+}
+
+.modal.d-block {
+  display: block;
+}
+
+.modal-dialog-centered::before {
+  display: block;
+  content: '';
+  height: 50%;
+  min-height: 20vh;
+}
+
+.modal-dialog-centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  margin: 0;
+  margin: 25vw 20vw;
+}
+
+.modal-content {
+  margin: 0 auto;
+} */

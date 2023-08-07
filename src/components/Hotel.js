@@ -94,6 +94,7 @@ export default function Hotel() {
 
   return (
     <>
+    {document.title="TravelKro-Hotels"}
     <div className="row">
       <div className='col'>
         <form onSubmit={handleSubmit} className="my-2">

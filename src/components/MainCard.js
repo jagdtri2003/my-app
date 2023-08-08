@@ -3,6 +3,7 @@ import Flights from './Flights'
 import Hotel from './Hotel'
 
 export default function MainCard() {
+  document.title="TravelKro-Home";
   return (
     <>
     <ul className="nav nav-tabs" id="myTab" role="tablist">

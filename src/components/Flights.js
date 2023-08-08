@@ -3,7 +3,7 @@ import FlightCard2 from './FlightCard2';
 
 export default function Flights() {
 
-
+  const [paymentStatus, setPaymentStatus] = useState('idle');
   const [showFlightList,setShowFlightList] =useState(false);
   const [flights, setFlights] = useState([]);
   const [departureCity, setDepartureCity] = useState('');
@@ -35,7 +35,8 @@ export default function Flights() {
           <p className="card-text">Destination: {flight.arrival_city}</p>
           <p className="card-text">Departure Time: {flight.dep_time}</p>
           <p className="card-text">Price: ₹{flight.price}</p>
-          <button className="btn btn-primary" onClick={() => setSelectedFlight(flight)}>Select Flight</button>
+          <button className="btn btn-primary" onClick={() =>{ setSelectedFlight(flight) 
+          setPaymentStatus("idle")}}>Select Flight</button>
         </div>
       </div>
     );
@@ -79,14 +80,14 @@ export default function Flights() {
                         </select>
                     </div>
                 </div>
-                <button class="btn btn-primary" type="button" onClick={searchFlights}>Search Flights</button>
+                <button class="btn btn-primary my-3" type="button" onClick={searchFlights}>Search Flights</button>
             </form>
         </div>
         <div className="col my-3 ms-1">
               {selectedFlight && (
                 <div>
                   <h3>&nbsp;Selected Flight</h3>
-                  <FlightCard2 flight={selectedFlight} passengerCount={passengerCount} />
+                  <FlightCard2 flight={selectedFlight} passengerCount={passengerCount} paymentStatus={paymentStatus} setPaymentStatus={setPaymentStatus}/>
                 </div>
               )}
         </div>

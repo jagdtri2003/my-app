@@ -14,25 +14,17 @@ export default function Footer() {
                 <div className="p-2" style={{ fontSize: "15px" }}>
                   Made with &hearts; by Jagdamba Tripathi
                 </div>
-                {/* Copyright */}
               </div>
               <div className="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
-                {/* Facebook */}
                 <a className="btn btn-outline-light btn-floating m-1 text-white" role="button">
                   <i className="fab fa-facebook-f"></i>
                 </a>
-
-                {/* Twitter */}
                 <a className="btn btn-outline-light btn-floating m-1 text-white" role="button">
                   <i className="fab fa-twitter"></i>
                 </a>
-
-                {/* Google */}
                 <a className="btn btn-outline-light btn-floating m-1 text-white" role="button">
                   <i className="fab fa-google"></i>
                 </a>
-
-                {/* Instagram */}
                 <a className="btn btn-outline-light btn-floating m-1 text-white" role="button">
                   <i className="fab fa-instagram"></i>
                 </a>

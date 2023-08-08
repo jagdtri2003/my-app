@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function About() {
+  document.title="TravelKro-About Us";
   return (
     <div className="container mt-5">
       <div className="row">

@@ -1,6 +1,7 @@
 import React from 'react'
 import Flights from './Flights'
 import Hotel from './Hotel'
+import { Container } from 'react-bootstrap';
 
 export default function MainCard() {
   document.title="TravelKro-Home";
@@ -20,7 +21,10 @@ export default function MainCard() {
     <div className="tab-content my-2" id="myTabContent">
     <div className="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabIndex="0"><Flights/></div>
     <div className="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabIndex="0">{<Hotel/>}</div>
-    <div className="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabIndex="0">Car Rent</div>
+    <div className="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" style={{ minHeight: '65vh' }} tabIndex="0">    <Container fluid className="p-0 flex-grow-1">
+      {/* No content inside */}
+      <h3>Coming Soon...</h3>
+    </Container></div>
     </div>
     </>
   )

@@ -11,7 +11,8 @@ export default function Flights() {
   const [selectedFlight,setSelectedFlight]=useState(null);
   const [passengerCount,setPassengerCount]=useState(1);
 
-  const searchFlights = async () => {
+  const searchFlights = async (event) => {
+    event.preventDefault();
     try {
       const response = await fetch(
         `https://script.google.com/macros/s/AKfycbye6Yi_bm6nPVgZMe3q8zS4gq2LNSuaVgZyNjQ6z3vQl5HjjrMCYHYSqxqsXFnms587mg/exec?frm=${departureCity}&to=${destinationCity}`
@@ -47,17 +48,20 @@ export default function Flights() {
     <>
     <div className='row'>
         <div className="col mt-2">
-            <form>
+            <form onSubmit={searchFlights}>
                 <div class="form-row">
                     <div class="mr-2 mb-3">
                         <label for="inputFrom">From</label>
                         <input type="text" class="form-control" id="inputFrom" placeholder="Departure City"
                         value={departureCity}
-                        onChange={(e) => setDepartureCity(e.target.value)} required/>
+                        required 
+                        onChange={(e) => {
+                          setDepartureCity(e.target.value)}}
+                        />
                     </div>
                     <div class="mr-2 mb-3">
                         <label for="inputTo">To</label>
-                        <input type="text" class="form-control" id="inputTo" placeholder="Destination City" value={destinationCity} onChange={(e) => setDestinationCity(e.target.value)}  required/>
+                        <input type="text" class="form-control" id="inputTo" placeholder="Destination City" value={destinationCity} onChange={(e) => {setDestinationCity(e.target.value)}}  required />
                     </div>
                 </div>
                 <div class="form-row">
@@ -80,7 +84,7 @@ export default function Flights() {
                         </select>
                     </div>
                 </div>
-                <button class="btn btn-primary my-3" type="button" onClick={searchFlights}>Search Flights</button>
+                <button class="btn btn-primary my-3" type="submit" >Search Flights</button>
             </form>
         </div>
         <div className="col my-3 ms-1">

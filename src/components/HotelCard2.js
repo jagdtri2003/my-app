@@ -1,10 +1,12 @@
-import React from 'react';
+import React,{useState} from 'react';
 import jsPDF from 'jspdf';
-import { Button, Spinner } from 'react-bootstrap';
-import axios from 'axios';
+import { Button, Spinner,Modal } from 'react-bootstrap';
+import PaymentGateway from './PaymentGateway';
 
 export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,paymentStatus,setPaymentStatus}) {
 
+    const [showPaymentGateway, setShowPaymentGateway] = useState(false);
+    const [showPaymentModal, setShowPaymentModal] = useState(false); 
     const startDate = new Date(checkInDate);
     const endDate = new Date(checkOutDate);
     const numberOfDays = (endDate - startDate) / (1000 * 3600 * 24); // Calculate the number of days
@@ -15,9 +17,10 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
     const handlePayNowClick = () => {
       // Simulate payment processing
       setPaymentStatus('processing');
-      setTimeout(() => {
-        setPaymentStatus('success'); // Change this based on actual payment response
-      }, 2500);
+      setShowPaymentModal(true);
+      // setTimeout(() => {
+      //   setPaymentStatus('success'); // Change this based on actual payment response
+      // }, 2500);
     };
   
     let buttonText;
@@ -118,7 +121,7 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
       <Button
           variant={paymentStatus === 'success' ? 'success' : 'primary'}
           onClick={handlePayNowClick}
-          disabled={paymentStatus === 'processing' || paymentStatus === 'success'}
+          disabled={paymentStatus === 'processing' || paymentStatus === 'success' }
         >
           {buttonText}
         </Button>
@@ -129,6 +132,16 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
                 </Button>
         }
     </div>
+    <Modal show={showPaymentModal} onHide={() => {setShowPaymentModal(false)
+    setPaymentStatus('idle')}} onClose={() => {setShowPaymentModal(false)}  } centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Payment Gateway</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {/* Render the PaymentGateway component inside the modal */}
+          <PaymentGateway setPaymentStatus={setPaymentStatus} onClose={() => {setShowPaymentModal(false)}} />
+        </Modal.Body>
+      </Modal>
   </div>
   )
 }

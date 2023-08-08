@@ -52,7 +52,10 @@ export default function FlightCard2({ flight, passengerCount,paymentStatus,setPa
       doc.text(`Departure Time: ${flight.dep_time}`, 10, 60);
       doc.text(`Passengers: ${passengerCount}`, 10, 70);
       doc.text(`Total Price:${price} Rs`, 10, 80);
-      doc.text('Payment Status: Successful ',10,90);
+      doc.text('Payment Status: ',10,90);
+      doc.setTextColor(0, 128, 0); // RGB color for green
+      doc.text('Successful',49, 90);
+      doc.setTextColor(33, 37, 41);
       doc.text(`Reference Id: ${referenceId}`,130,90);
 
       const note = `

@@ -82,7 +82,10 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
         doc.text(`From Date: ${formattedStartDate}`, 10, 60);
         doc.text(`To Date: ${formattedEndDate}`, 10, 70);
         doc.text(`Total Price:${total} Rs`, 10, 80);
-        doc.text('Payment Status: Successful ',10,90);
+        doc.text('Payment Status: ',10,90);
+        doc.setTextColor(0, 128, 0); // RGB color for green
+        doc.text('Successful',49, 90);
+        doc.setTextColor(33, 37, 41);
         doc.text(`Reference Id: ${referenceId}`,130,90);
 
         const note = `

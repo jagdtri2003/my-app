@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Button, Spinner } from 'react-bootstrap';
+import { Button, Spinner,Modal } from 'react-bootstrap';
 import jsPDF from 'jspdf';
+import PaymentGateway from './PaymentGateway';
+
 
 export default function FlightCard2({ flight, passengerCount,paymentStatus,setPaymentStatus }) {
   const price = flight.price * parseInt(passengerCount);
+  const [showPaymentModal, setShowPaymentModal] = useState(false); 
+
 
   function generateReferenceId() {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -83,9 +87,7 @@ export default function FlightCard2({ flight, passengerCount,paymentStatus,setPa
   const handlePayNowClick = () => {
     // Simulate payment processing
     setPaymentStatus('processing');
-    setTimeout(() => {
-      setPaymentStatus('success'); // Change this based on actual payment response
-    }, 2500);
+    setShowPaymentModal(true);
   };
 
   let buttonText;
@@ -128,6 +130,16 @@ export default function FlightCard2({ flight, passengerCount,paymentStatus,setPa
                 </Button>
         }
       </div>
+      <Modal show={showPaymentModal} onHide={() => {setShowPaymentModal(false)
+      setPaymentStatus('idle')}} onClose={() => {setShowPaymentModal(false)}  } centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Payment Gateway</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {/* Render the PaymentGateway component inside the modal */}
+          <PaymentGateway setPaymentStatus={setPaymentStatus} onClose={() => {setShowPaymentModal(false)}} />
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }

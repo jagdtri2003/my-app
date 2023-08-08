@@ -5,7 +5,6 @@ import PaymentGateway from './PaymentGateway';
 
 export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,paymentStatus,setPaymentStatus}) {
 
-    const [showPaymentGateway, setShowPaymentGateway] = useState(false);
     const [showPaymentModal, setShowPaymentModal] = useState(false); 
     const startDate = new Date(checkInDate);
     const endDate = new Date(checkOutDate);
@@ -18,9 +17,7 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
       // Simulate payment processing
       setPaymentStatus('processing');
       setShowPaymentModal(true);
-      // setTimeout(() => {
-      //   setPaymentStatus('success'); // Change this based on actual payment response
-      // }, 2500);
+
     };
   
     let buttonText;

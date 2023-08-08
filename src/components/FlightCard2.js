@@ -35,12 +35,28 @@ export default function FlightCard2({ flight, passengerCount,paymentStatus,setPa
     doc.text(`Passengers: ${passengerCount}`, 10, 70);
     doc.text(`Total Price:${price} Rs`, 10, 80);
     doc.text('Payment Status: Successful ',10,90)
+
+    const note = `
+    Dear Valued Traveler,
+
+    Thank you for choosing TravelKro for your journey. We're excited to be part of your adventure and are committed to making 
+    your experience exceptional.
+
+    May your flight be smooth, your destination unforgettable, and your memories everlasting.
+
+    Safe travels and happy trails!
+
+    Warm regards,
+    TravelKro
+  `;
+  doc.setFontSize(10);
+  doc.setTextColor(33, 37, 41);
+  doc.text(note, 5, 110);
     
     // Save the PDF with a random number in the name
     doc.save(`flight_details_${randomNum}.pdf`);
   };
   
-
   const handlePayNowClick = () => {
     // Simulate payment processing
     setPaymentStatus('processing');
@@ -85,7 +101,7 @@ export default function FlightCard2({ flight, passengerCount,paymentStatus,setPa
         <br /><br/>
         {( paymentStatus==='success') &&
                 <Button variant="primary" onClick={generatePDF}>
-                  Generate PDF
+                  Download Receipt
                 </Button>
         }
       </div>

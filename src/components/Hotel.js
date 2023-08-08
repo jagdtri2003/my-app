@@ -10,6 +10,7 @@ export default function Hotel() {
     const [hotels, setHotels] = useState([]);
     const [checkInDate, setCheckInDate] = useState('');
     const [checkOutDate, setCheckOutDate] = useState('');
+    const [paymentStatus, setPaymentStatus] = useState('idle');
 
     const fetchHotelsFromApi = async () => {
       try {
@@ -38,7 +39,9 @@ export default function Hotel() {
             <h6 className="card-subtitle mb-2 text-muted">{hotel.location}</h6>
             <p className="card-text">{hotel.description}</p>
             <p className="card-text">Price/Day : {hotel.price}</p>
-            <button className="btn btn-primary" onClick={() => setSelectedHotel(hotel)}>{buttontxt}</button>
+            <button className="btn btn-primary" onClick={() =>{ setSelectedHotel(hotel)
+            setPaymentStatus("idle")
+            }}>{buttontxt}</button>
           </div>
         </div>
       );
@@ -181,7 +184,7 @@ export default function Hotel() {
               {selectedHotel && (
                 <div>
                   <h3>&nbsp;Selected Hotel</h3>
-                  <HotelCard2 hotel={selectedHotel} buttontxt="Pay Now" checkInDate={checkInDate} checkOutDate={checkOutDate} />
+                  <HotelCard2 hotel={selectedHotel} buttontxt="Pay Now" checkInDate={checkInDate} checkOutDate={checkOutDate} paymentStatus={paymentStatus} setPaymentStatus={setPaymentStatus} />
                 </div>
               )}
     </div>

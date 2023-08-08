@@ -69,7 +69,7 @@ export default function FlightCard2({ flight, passengerCount,paymentStatus,setPa
       Safe travels and happy trails!
 
       Warm regards,
-      TravelKro
+      Jagdamba Tripathi
     `;
     doc.setFontSize(10);
     doc.setTextColor(33, 37, 41);

@@ -96,7 +96,7 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
         May your days be filled with relaxation, discovery, and delightful moments.
     
         Safe travels and wonderful memories,
-        TravelKro
+        Jagdamba Tripathi
       `;
       doc.setFontSize(10);
       doc.setTextColor(33, 37, 41);

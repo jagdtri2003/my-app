@@ -48,6 +48,7 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
       const doc = new jsPDF();
       const formattedStartDate = startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
       const formattedEndDate = endDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      const receiptGeneratedAt = new Date().toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' });
       
       // Generate a random number
       const referenceId = generateReferenceId();
@@ -87,6 +88,8 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
         doc.text('Successful',49, 90);
         doc.setTextColor(33, 37, 41);
         doc.text(`Reference Id: ${referenceId}`,130,90);
+        doc.setFontSize(8);
+        doc.text(`Receipt Generated At: ${receiptGeneratedAt}`, 10, 100);
 
         const note = `
         Dear Valued Guest,

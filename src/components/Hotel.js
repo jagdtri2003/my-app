@@ -19,14 +19,15 @@ export default function Hotel() {
         );
         const data = await response.json();
         setHotels(data.data);
+        setShowHotelList(true);
       } catch (error) {
         console.error('Error fetching hotels:', error);
       }
     };
 
-    useEffect(() => {
-      fetchHotelsFromApi();
-    }, []);
+    // useEffect(() => {
+    //   fetchHotelsFromApi();
+    // }, []);
 
     // const filteredHotels = hotels.filter((hotel) => hotel.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
     // hotel.name.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -49,7 +50,6 @@ export default function Hotel() {
 
     const handleSubmit = (event) => {
       event.preventDefault();
-      setShowHotelList(true);
       fetchHotelsFromApi();
     };
   

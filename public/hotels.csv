@@ -1,51 +1,100 @@
-id,name,location,price,description
-1,Taj Mahal Palace,Mumbai,₹12000,A historic luxury hotel overlooking the Gateway of India.
-2,The Oberoi Amarvilas,Agra,₹15000,A 5-star hotel with views of the Taj Mahal from every room.
-3,The Leela Palace,New Delhi,₹18000,A grand palace hotel offering opulent accommodations and top-notch services.
-4,ITC Grand Chola,Chennai,₹13500,A luxurious hotel with intricate Dravidian architecture and lavish amenities.
-5,The Oberoi Udaivilas,Udaipur,₹22000,A beautiful lakeside hotel offering stunning views of Lake Pichola.
-6,The Rambagh Palace,Jaipur,₹20000,A former royal palace turned luxury hotel, known for its royal ambiance.
-7,The Park Kolkata,Kolkata,₹9500,A contemporary hotel with a rooftop pool, offering views of the city skyline.
-8,Wildflower Hall,Shimla,₹16000,A luxury mountain resort located in the Himalayas, offering breathtaking views.
-9,Fairmont Jaipur,Jaipur,₹14000,A luxurious hotel inspired by the architecture of the Mughal dynasty.
-10,The Zuri Kumarakom,Kerala,₹12500,A serene backwater resort with traditional Kerala-style cottages.
-11,The Taj Mahal Hotel,New Delhi,₹16500,A luxury hotel known for its iconic design and top-notch dining experiences.
-12,The Lalit Mumbai,Mumbai,₹11000,A contemporary hotel located near the international airport, offering modern amenities.
-13,The Leela Goa,Goa,₹19000,A luxury beach resort with private access to the pristine Mobor Beach.
-14,The Oberoi Mumbai,Mumbai,₹21000,A luxury hotel overlooking the Arabian Sea, offering world-class services.
-15,ITC Mughal,Agra,₹13000,A luxury hotel inspired by Mughal architecture, set amidst lush gardens.
-16,Vivanta by Taj - Malabar,Kochi,₹14500,A luxury hotel with stunning views of the Cochin Harbour and Chinese Fishing Nets.
-17,The Oberoi Gurgaon,Gurgaon,₹17000,A contemporary hotel located in the business district, known for its luxury suites.
-18,ITC Windsor,Bengaluru,₹12500,A heritage hotel offering a blend of Victorian and Indian architecture.
-19,The Leela Mumbai,Mumbai,₹15500,A luxury hotel located by the Andheri Kurla business district, with multiple dining options.
-20,Taj Lake Palace,Udaipur,₹25000,A stunning palace hotel located on an island in Lake Pichola, offering a unique experience.
-21,JW Marriott Hotel,Mumbai,₹18500,A luxurious hotel in the heart of Mumbai, offering world-class amenities.
-22,The Oberoi Cecil,Shimla,₹17000,A heritage hotel with British colonial architecture, set amidst the Himalayan foothills.
-23,ITC Rajputana,Jaipur,₹13500,A luxury hotel reflecting the rich Rajasthani heritage and culture.
-24,The Ritz-Carlton,Bengaluru,₹20000,A sophisticated hotel in Bengaluru's central business district, known for its elegant interiors.
-25,The Imperial,New Delhi,₹21000,A historic luxury hotel with an old-world charm, located near Connaught Place.
-26,Grand Hyatt,Mumbai,₹18500,A contemporary hotel with modern amenities and easy access to Mumbai's business hubs.
-27,Taj Exotica Resort,Goa,₹24000,A luxury resort overlooking the Arabian Sea, offering a peaceful beachside retreat.
-28,The Oberoi,Mumbai,₹22000,A luxurious hotel located in the heart of Mumbai's business and shopping districts.
-29,ITC Kakatiya,Hyderabad,₹16000,A regal hotel known for its architecture and warm hospitality.
-30,Le Meridien,New Delhi,₹17000,A modern hotel located near the Presidential Palace, known for its chic design.
-31,Taj Falaknuma Palace,Hyderabad,₹30000,A grand palace hotel offering panoramic views of Hyderabad's skyline.
-32,The Westin,Gurgaon,₹15500,A contemporary hotel known for its signature Heavenly Beds and wellness facilities.
-33,The Leela Palace,Bengaluru,₹24000,A luxury hotel with lush gardens, located near Bengaluru's business district.
-34,Crowne Plaza,Chennai,₹12000,A modern hotel located in the heart of Chennai, known for its warm hospitality.
-35,The Trident,Agra,₹14000,A luxury hotel located near the Taj Mahal, offering views of the monument.
-36,The Leela,Kovalam,Kerala,₹21000,A beachfront resort offering stunning views of the Arabian Sea.
-37,Hyatt Regency,Pune,₹14000,A contemporary hotel located in Pune's IT hub, known for its luxurious amenities.
-38,Vivanta by Taj - Dal View,Srinagar,₹18000,A luxury hotel offering picturesque views of Dal Lake and the surrounding mountains.
-39,The St. Regis,Mumbai,₹28000,A luxury hotel located in Lower Parel, known for its elegant interiors and impeccable service.
-40,The Oberoi Gurgaon,Gurgaon,₹21000,A luxury hotel with modern design and world-class amenities, located near the airport.
-41,JW Marriott Hotel,Pune,₹16500,A luxury hotel offering contemporary design and top-notch services.
-42,Taj West End,Bengaluru,₹22000,A lush green oasis in the heart of Bengaluru, offering a tranquil retreat.
-43,The Oberoi Beach Resort,Alibaug,₹19500,A beachfront resort located near Mumbai, offering a peaceful escape.
-44,The Leela Palace,Chennai,₹23000,A grand palace hotel with lavish interiors, located near Marina Beach.
-45,The Lalit Ashok,Bengaluru,₹13500,A luxury hotel with a prime location in Bengaluru's business district.
-46,The Oberoi Rajvilas,Jaipur,₹30000,A luxurious resort with Rajasthani architecture and lush gardens, offering a royal experience.
-47,ITC Maratha,Mumbai,₹20000,A luxury hotel inspired by Maratha architecture, located near Mumbai's international airport.
-48,Taj Lands End,Mumbai,₹22000,A luxury hotel with panoramic views of the Arabian Sea and Bandra-Worli Sea Link.
-49,Taj Fisherman's Cove Resort,Chennai,₹24000,A luxury beach resort located near Chennai, offering breathtaking sea views.
-50,The Oberoi Mumbai,Mumbai,₹25000,A luxury hotel located near Marine Drive, known for its warm hospitality and sea views.
+51,Taj Mahotsav Hotel,Prayagraj,₹11000,A luxurious hotel offering modern amenities in the heart of Prayagraj.
+52,The Ganga View Resort,Haridwar,₹9500,A serene resort with views of the Ganges River perfect for a peaceful getaway.
+53,Radisson Blu Plaza,Mysuru,₹13000,A contemporary hotel with easy access to Mysore Palace and other attractions.
+54,Fortune Select Metropolitan,Jaipur,₹12000,A modern hotel with well-appointed rooms suitable for business and leisure travelers.
+55,The Lalit Grand Palace,Srinagar,₹28000,A palace hotel overlooking Dal Lake providing a luxurious stay in Srinagar.
+56,Ramada Plaza,Kochi,₹15000,A luxury hotel with waterfront views and proximity to Fort Kochi's historic sites.
+57,Vivanta by Taj - Connemara,Chennai,₹22000,A heritage hotel known for its colonial charm and upscale facilities.
+58,Courtyard by Marriott,Ahmedabad,₹13500,A stylish hotel offering comfortable accommodations near key business areas.
+59,Hyatt Regency,Kolkata,₹19000,A contemporary hotel with modern amenities and stunning views of the city.
+60,The Westin Pune,Pune,₹17000,A luxury hotel known for its wellness facilities and convenient location.
+61,ITC Sonar,Kolkata,₹21000,A luxury resort with lush gardens offering a peaceful escape in the heart of the city.
+62,Novotel Goa Resort,Goa,₹24000,A beachfront resort with a vibrant atmosphere and direct access to Candolim Beach.
+63,Taj Chandigarh,Chandigarh,₹18500,A modern hotel with elegant design and luxurious amenities in Chandigarh.
+64,Fairmont Mumbai,Mumbai,₹22000,A contemporary hotel offering upscale accommodations and fine dining options.
+65,Radisson Blu Hotel,Amritsar,₹16000,A modern hotel near the Golden Temple perfect for exploring the city's attractions.
+66,JW Marriott Hotel Bengaluru,Bengaluru,₹24000,A luxurious hotel with modern design and world-class amenities.
+67,Courtyard by Marriott,Agra,₹12000,A stylish hotel offering comfortable accommodations near the Taj Mahal.
+68,Radisson Blu Hotel,Pune,₹18500,A contemporary hotel with upscale facilities in Pune's business district.
+69,Hilton Garden Inn,Chennai,₹14000,A modern hotel with well-equipped rooms and easy access to Chennai's landmarks.
+70,The Leela Palace,Chennai,₹28000,A luxury hotel known for its opulent accommodations and impeccable service.
+71,Hyatt Regency Mumbai,₹21000,A contemporary hotel located near Mumbai's airport offering modern amenities.
+72,Radisson Blu Plaza,Delhi,₹18000,A modern hotel with easy access to Delhi's attractions and business districts.
+73,Crowne Plaza,Kochi,₹15500,A modern hotel with waterfront views suitable for both business and leisure travelers.
+74,The Oberoi Rajputana,Udaipur,₹26000,A luxurious resort with Rajasthani architecture and serene surroundings.
+75,Novotel Hyderabad Convention Centre,Hyderabad,₹17000,A contemporary hotel with spacious rooms and conference facilities.
+76,JW Marriott Hotel Pune,₹19500,A luxury hotel known for its elegant design and world-class amenities.
+77,The Lalit Temple View,Khajuraho,₹16500,A modern hotel offering comfortable accommodations near the Khajuraho Temples.
+78,Courtyard by Marriott,Jaipur,₹14000,A stylish hotel with well-appointed rooms suitable for business and leisure travelers.
+79,Radisson Blu Agra,Agra,₹19000,A modern hotel with upscale facilities and convenient access to the Taj Mahal.
+80,Hyatt Regency Delhi,₹25000,A contemporary hotel offering modern amenities and easy access to Delhi's attractions.
+81,The Zuri White Sands,Goa,₹22000,A beachfront resort with a relaxing atmosphere and direct access to Varca Beach.
+82,Crowne Plaza,Bengaluru,₹19000,A modern hotel with elegant design and convenient access to Bengaluru's attractions.
+83,Taj Deccan,Hyderabad,₹16500,A luxury hotel with modern amenities located near Banjara Hills.
+84,Radisson Blu Udaipur,Udaipur,₹23000,A modern hotel with views of Fatehsagar Lake offering a serene stay in Udaipur.
+85,Courtyard by Marriott,Pune,₹14000,A stylish hotel with well-appointed rooms suitable for business and leisure travelers.
+86,The Oberoi Grand,Kolkata,₹28000,A luxury hotel with colonial charm offering a luxurious stay in Kolkata.
+87,Hyatt Regency Chennai,₹21000,A contemporary hotel with modern amenities and easy access to Chennai's landmarks.
+88,Novotel Bengaluru Techpark,Bengaluru,₹17000,A modern hotel with upscale facilities perfect for business travelers.
+89,Radisson Blu Pune,₹22000,A contemporary hotel with well-equipped rooms suitable for both business and leisure travelers.
+90,Taj Gateway Resort,Coorg,₹24000,A luxurious resort nestled amidst coffee plantations offering a peaceful retreat.
+91,Courtyard by Marriott,Gurgaon,₹18500,A stylish hotel with well-appointed rooms suitable for business and leisure travelers.
+92,Hyatt Regency Kolkata,₹15500,A contemporary hotel with modern amenities and easy access to the city's attractions.
+93,The Westin Chennai,₹17000,A luxury hotel with upscale facilities and stunning views of the city.
+94,Radisson Blu Mysore,Mysuru,₹19000,A contemporary hotel with modern amenities located near Mysore Palace.
+95,Taj Holiday Village,Goa,₹22000,A beachfront resort offering a relaxing atmosphere and direct access to Sinquerim Beach.
+96,Novotel Kolkata Hotel,₹21000,A contemporary hotel with well-equipped rooms suitable for both business and leisure travelers.
+97,Hyatt Pune,₹24000,A contemporary hotel with modern amenities offering a comfortable stay in Pune.
+98,Courtyard by Marriott,Hyderabad,₹18500,A stylish hotel with well-appointed rooms suitable for business and leisure travelers.
+99,The Leela Palace,Bengaluru,₹30000,A luxury hotel known for its opulent accommodations and impeccable service.
+100,The Oberoi Cecil,Shimla,₹26000,A heritage hotel with British colonial architecture offering a serene stay in Shimla.
+101,The Oberoi Sukhvilas,Chandigarh,₹32000,A luxury forest resort offering a serene escape amidst the Shivalik range.
+102,JW Marriott Hotel,Chennai,₹24000,A luxurious hotel known for its elegant design and top-notch services.
+103,Radisson Blu Hotel,Guwahati,₹15000,A contemporary hotel with modern amenities and stunning views of the Brahmaputra River.
+104,The Oberoi Mumbai,Mumbai,₹26000,A luxury hotel located near Marine Drive known for its warm hospitality and sea views.
+105,Le Meridien,Jaipur,₹17500,A modern hotel with upscale facilities and easy access to Jaipur's attractions.
+106,Crowne Plaza,New Delhi,₹19500,A modern hotel located in the heart of Delhi's business district known for its warm hospitality.
+107,Taj Falaknuma Palace,Hyderabad,₹35000,A grand palace hotel offering panoramic views of Hyderabad's skyline.
+108,The Westin Sohna Resort,Gurugram,₹28000,A luxury resort set amidst lush greenery, perfect for a relaxing getaway.
+109,Taj Bengal,Kolkata,₹23000,A luxury hotel with modern amenities located near the city's business and shopping districts.
+110,The Leela Palace,Udaipur,₹32000,A luxury hotel overlooking Lake Pichola offering opulent accommodations and top-notch services.
+111,Radisson Blu Plaza,Hyderabad,₹19000,A contemporary hotel with easy access to Hyderabad International Convention Centre.
+112,The Oberoi,Vilas,Udaipur,₹38000,A luxurious resort with traditional architecture and serene surroundings.
+113,ITC Maurya,New Delhi,₹26000,A luxury hotel inspired by Mauryan dynasty architecture, located near diplomatic enclave.
+114,Hyatt Regency,Lucknow,₹22000,A contemporary hotel with modern amenities, offering a comfortable stay in Lucknow.
+115,Radisson Blu,Mahabalipuram,₹17500,A beachfront resort with easy access to Mahabalipuram's historic sites.
+116,The Leela Ambience,Gurugram,₹25000,A luxury hotel located in Gurugram's business district with multiple dining options.
+117,Novotel Visakhapatnam,Visakhapatnam,₹17000,A modern hotel with waterfront views, perfect for exploring Visakhapatnam.
+118,Courtyard by Marriott,Kolkata,₹20000,A stylish hotel with well-appointed rooms, suitable for business and leisure travelers.
+119,The Oberoi New Delhi,New Delhi,₹32000,A luxury hotel known for its iconic design and world-class dining experiences.
+120,Taj Coromandel,Chennai,₹28000,A luxury hotel with opulent accommodations and easy access to Chennai's attractions.
+121,The Westin Hyderabad,Hyderabad,₹23000,A contemporary hotel with upscale facilities and stunning views of Hitec City.
+122,Radisson Blu Resort,Goa,₹31000,A beachfront resort with a vibrant atmosphere and direct access to Cavelossim Beach.
+123,JW Marriott Mumbai Sahar,Mumbai,₹25000,A luxurious hotel located near Mumbai's international airport, offering modern amenities.
+124,ITC Gardenia,Bengaluru,₹30000,A luxury hotel known for its lush gardens and impeccable service in the heart of Bengaluru.
+125,Crowne Plaza,Jaipur,₹19500,A modern hotel with well-appointed rooms and convenient access to Jaipur's attractions.
+126,The Lalit Great Eastern,Kolkata,₹26000,A heritage hotel known for its colonial charm and elegant interiors.
+127,Taj Krishna,Hyderabad,₹22000,A luxury hotel with modern amenities located in the upscale Banjara Hills.
+128,Radisson Blu Jaipur,Jaipur,₹19000,A contemporary hotel with easy access to Jaipur's attractions and business districts.
+129,ITC Grand Bharat,Gurugram,₹35000,A luxury resort set amidst lush greenery and offering world-class amenities.
+130,The Oberoi,Vanyavilas,Ranthambhore,₹38000,A luxury jungle resort offering a unique wildlife experience near Ranthambhore National Park.
+131,Novotel Hyderabad Airport,Hyderabad,₹20000,A contemporary hotel located near Rajiv Gandhi International Airport, perfect for transit stays.
+132,Hyatt Regency,Mumbai,₹28000,A contemporary hotel with modern amenities and easy access to Mumbai's business hubs.
+133,Courtyard by Marriott,Chennai,₹21000,A stylish hotel with well-appointed rooms, suitable for both business and leisure travelers.
+134,Radisson Blu Pune Hinjawadi,Pune,₹24000,A contemporary hotel with upscale facilities, perfect for business travelers.
+135,The Leela Palace,New Delhi,₹38000,A luxury hotel known for its opulent accommodations and impeccable service.
+136,The Oberoi,Wildflower Hall,Shimla,₹32000,A luxury mountain resort located in the Himalayas offering breathtaking views.
+137,Novotel Bengaluru Outer Ring Road,Bengaluru,₹22000,A modern hotel with upscale facilities, perfect for both business and leisure travelers.
+138,Taj Krishna,Hyderabad,₹26000,A luxury hotel with modern amenities located in the upscale Banjara Hills.
+139,Radisson Blu Hotel,Indore,₹19000,A contemporary hotel with modern amenities, offering a comfortable stay in Indore.
+140,The Oberoi Cecil,Shimla,₹30000,A heritage hotel with British colonial architecture, offering a serene stay in Shimla.
+141,ITC Windsor,Bengaluru,₹28000,A heritage hotel offering a blend of Victorian and Indian architecture.
+142,Courtyard by Marriott,Pune City Centre,Pune,₹23000,A stylish hotel with well-appointed rooms, suitable for business and leisure travelers.
+143,The Oberoi Amarvilas,Agra,₹36000,A 5-star hotel with views of the Taj Mahal from every room.
+144,Taj Exotica Resort,Andamans,₹42000,A luxury resort set amidst tropical paradise, offering a tranquil beachside retreat.
+145,Hyatt Regency,Mumbai,₹26000,A contemporary hotel located near Mumbai's airport, offering modern amenities.
+146,Radisson Blu Hotel,Varanasi,₹24000,A modern hotel with upscale facilities, offering easy access to Varanasi's spiritual sites.
+147,Courtyard by Marriott,Goa,₹21000,A stylish hotel with well-appointed rooms, suitable for both business and leisure travelers.
+148,The Oberoi Mumbai,Mumbai,₹32000,A luxury hotel located near Marine Drive known for its warm hospitality and sea views.
+149,The Westin Sohna Resort,Gurugram,₹28000,A luxury resort set amidst lush greenery, perfect for a relaxing getaway.
+150,ITC Grand Chola,Chennai,₹36000,A luxurious hotel with intricate Dravidian architecture and lavish amenities.

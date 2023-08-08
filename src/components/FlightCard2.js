@@ -24,6 +24,7 @@ export default function FlightCard2({ flight, passengerCount,paymentStatus,setPa
     const doc = new jsPDF();
     
     const referenceId = generateReferenceId();
+    const receiptGeneratedAt = new Date().toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' });
 
     const qrCodeImageUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(referenceId)}&size=100x100`;
 
@@ -61,6 +62,8 @@ export default function FlightCard2({ flight, passengerCount,paymentStatus,setPa
       doc.text('Successful',49, 90);
       doc.setTextColor(33, 37, 41);
       doc.text(`Reference Id: ${referenceId}`,130,90);
+      doc.setFontSize(8);
+      doc.text(`Receipt Generated At: ${receiptGeneratedAt}`, 10, 100);
 
       const note = `
       Dear Valued Traveler,

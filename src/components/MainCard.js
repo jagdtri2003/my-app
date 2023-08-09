@@ -4,7 +4,7 @@ import Hotel from './Hotel'
 import { Container } from 'react-bootstrap';
 
 export default function MainCard() {
-
+  document.title="TravelKro";
   return (
     <>
     <ul className="nav nav-tabs" id="myTab" role="tablist">

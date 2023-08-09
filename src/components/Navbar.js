@@ -6,7 +6,7 @@ export default function Navbar(props) {
   return (
     <nav className="navbar navbar-expand-lg " style={{ backgroundColor: '#45526e'}}>
         <div className="container-fluid">
-        <a className="navbar-brand" href="#" style={{ color: '#fff' }}>
+        <a className="navbar-brand" href="#" style={{ color: '#fff' ,fontFamily:'Cherry Bomb One'}}>
         {/* <img src={logo} alt="Logo" width="110" height="60" class="d-inline-block align-text-top"/> */}
         {props.title}
         </a>

@@ -16,8 +16,8 @@ export default function Footer() {
                 </div>
               </div>
               <div className="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
-                <a className="btn btn-outline-light btn-floating m-1 text-white" role="button">
-                  <i className="fab fa-facebook-f"></i>
+                <a className="btn btn-outline-light btn-floating m-1 text-white" role="button" href='https://www.linkedin.com/in/jagdamba-tripathi/' target="_blank">
+                  <i className="fab fa-linkedin"></i>
                 </a>
                 <a className="btn btn-outline-light btn-floating m-1 text-white" role="button">
                   <i className="fab fa-twitter"></i>

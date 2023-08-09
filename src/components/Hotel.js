@@ -25,13 +25,6 @@ export default function Hotel() {
       }
     };
 
-    // useEffect(() => {
-    //   fetchHotelsFromApi();
-    // }, []);
-
-    // const filteredHotels = hotels.filter((hotel) => hotel.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    // hotel.name.toLowerCase().includes(searchQuery.toLowerCase()));
-
     const HotelCard = ({ hotel,buttontxt }) => {
       return (
         <div className="card mb-3">

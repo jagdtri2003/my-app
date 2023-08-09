@@ -6,10 +6,10 @@ export default function Navbar(props) {
   return (
     <nav className="navbar navbar-expand-lg " style={{ backgroundColor: '#45526e'}}>
         <div className="container-fluid">
-        <a className="navbar-brand" href="#" style={{ color: '#fff' ,fontFamily:'Cherry Bomb One'}}>
+        <Link className="navbar-brand" to="/" style={{ color: '#fff' ,fontFamily:'Cherry Bomb One'}}>
         {/* <img src={logo} alt="Logo" width="110" height="60" class="d-inline-block align-text-top"/> */}
         {props.title}
-        </a>
+        </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
         </button>

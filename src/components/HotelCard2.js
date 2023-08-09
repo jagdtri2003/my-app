@@ -65,10 +65,10 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
         doc.setFontSize(20);
         doc.setTextColor(52, 58, 64); // Bootstrap's secondary color
         doc.setFont('courier', 'normal');
-        doc.text('TravelKro - Hotel Receipt', 35, 15); // Replace with your travel agency name
+        doc.text('TravelKro - Hotel Receipt', 40, 15); // Replace with your travel agency name
     
         const titleWidth = doc.getStringUnitWidth('TravelKro - Hotel Receipt') * doc.internal.getFontSize() / doc.internal.scaleFactor;
-        const titleX = 35;
+        const titleX = 40;
         const titleY = 15;
         doc.line(titleX, titleY + 2, titleX + titleWidth, titleY + 2);
         

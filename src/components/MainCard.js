@@ -3,10 +3,16 @@ import Flights from './Flights'
 import Hotel from './Hotel'
 import { Container } from 'react-bootstrap';
 
-export default function MainCard() {
+export default function MainCard({user}) {
   document.title="TravelKro";
+  let displayName=user.displayName;
+  const savedDisplayName = localStorage.getItem('displayName');
+  if (savedDisplayName) {
+    displayName=savedDisplayName;
+  }
   return (
     <>
+    {displayName && <p>Welcome, <b>{displayName} !</b></p>}
     <ul className="nav nav-tabs" id="myTab" role="tablist">
     <li className="nav-item" role="presentation">
         <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><i class="fa-solid fa-plane-up"></i> Flights</button>

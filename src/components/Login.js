@@ -6,13 +6,16 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loggein, setLoggedin] = useState(false);
+  const [error, setError] = useState('');
   
 
   const handleLogin = (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth,email,password);
+    signInWithEmailAndPassword(auth,email,password).catch((err)=>{
+        setError(err.message);
+    });
   };
-  
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -57,6 +60,9 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
+                </div>
+                <div className='mb-2 text-danger'>
+                    {error}
                 </div>
                 <button type="submit" className="btn btn-primary">Login</button>
               </form>

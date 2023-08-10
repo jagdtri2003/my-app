@@ -17,17 +17,17 @@ import SignOut from './components/SignOut';
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [displayName, setDisplayName] = useState('');
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       if (authUser) {
         setUser(authUser);
-        setDisplayName(authUser.displayName);
       } else {
         setUser(null);
       }
-      setLoading(false);
+      setInterval(() => {
+        setLoading(false);
+      },250);
       
     });
 
@@ -50,9 +50,8 @@ function App() {
       <>
         <Navbar title="TravelKro" />
         <div className="container my-4">
-        {user && <p>Welcome, <b>{displayName} !</b></p>}
         <Routes>
-          <Route path="/" element={user ? <MainCard /> : <Navigate to="/signup" />} />
+          <Route path="/" element={user ? <MainCard user={user}/> : <Navigate to="/signup" />} />
           <Route path='/signup' element={<Signup/>}/>
           <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />

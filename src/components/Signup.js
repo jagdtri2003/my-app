@@ -9,17 +9,22 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loggein,setLoggedin]=useState(false);
+  const [error, setError] = useState('');
 
   const handleSignup = (e) => {
     e.preventDefault();
     
     createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
+    .then(async (userCredential) => {
         sendEmailVerification(userCredential.user);
-        return updateProfile(userCredential.user, {
+        localStorage.setItem('displayName', name);
+        localStorage.setItem('password', password);
+        await updateProfile(userCredential.user, {
         displayName: name
       });
-    })
+    }).catch((error) => {
+        setError(error.message);
+    });
 
   };
   useEffect(() => {
@@ -77,6 +82,9 @@ const Signup = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
+                </div>
+                <div className='text-danger'>
+                    {error}
                 </div>
                 <button type="submit" className="btn btn-primary">Sign Up</button>
               </form>

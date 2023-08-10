@@ -2,8 +2,15 @@ import React from 'react'
 import Flights from './Flights'
 import Hotel from './Hotel'
 import { Container } from 'react-bootstrap';
+import { signOut } from 'firebase/auth';
+import { auth } from './Firebase';
 
 export default function MainCard({user}) {
+
+  const SignOut =()=>{
+    signOut(auth);
+  }
+
   document.title="TravelKro";
   let displayName=user.displayName;
   const savedDisplayName = localStorage.getItem('displayName');
@@ -12,7 +19,7 @@ export default function MainCard({user}) {
   }
   return (
     <>
-    {displayName && <p>Welcome, <b>{displayName} !</b></p>}
+    {displayName && <p>Welcome, <b>{displayName} ! &nbsp;</b> <i class="fa-solid fa-right-from-bracket" title='Signout' style={{color:'red'}} onClick={SignOut}></i></p>}
     <ul className="nav nav-tabs" id="myTab" role="tablist">
     <li className="nav-item" role="presentation">
         <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><i class="fa-solid fa-plane-up"></i> Flights</button>

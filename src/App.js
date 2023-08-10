@@ -11,16 +11,19 @@ import { onAuthStateChanged } from 'firebase/auth';
 import React,{useEffect,useState} from 'react';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import SignOut from './components/SignOut';
 
 
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [displayName, setDisplayName] = useState('');
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       if (authUser) {
         setUser(authUser);
+        setDisplayName(authUser.displayName);
       } else {
         setUser(null);
       }
@@ -30,6 +33,7 @@ function App() {
 
     return () => unsubscribe();
   }, []);
+
 
   if (loading) {
     // Render a loading indicator while checking authentication state
@@ -46,12 +50,14 @@ function App() {
       <>
         <Navbar title="TravelKro" />
         <div className="container my-4">
+        {user && <p>Welcome, <b>{displayName} !</b></p>}
         <Routes>
           <Route path="/" element={user ? <MainCard /> : <Navigate to="/signup" />} />
           <Route path='/signup' element={<Signup/>}/>
           <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/signout" element={<SignOut />} />
         </Routes>
         </div>
         <Footer/>

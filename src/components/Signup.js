@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import { Link,Navigate} from 'react-router-dom';
-import { createUserWithEmailAndPassword,onAuthStateChanged } from 'firebase/auth';
+import { createUserWithEmailAndPassword,onAuthStateChanged,updateProfile,sendEmailVerification } from 'firebase/auth';
 import { auth } from './Firebase';
 
 
@@ -13,7 +13,13 @@ const Signup = () => {
   const handleSignup = (e) => {
     e.preventDefault();
     
-    createUserWithEmailAndPassword(auth,email,password);
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        sendEmailVerification(userCredential.user);
+        return updateProfile(userCredential.user, {
+        displayName: name
+      });
+    })
 
   };
   useEffect(() => {

@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import FlightCard2 from './FlightCard2';
+import { Spinner } from 'react-bootstrap';
 
 export default function Flights() {
 
@@ -10,10 +11,12 @@ export default function Flights() {
   const [destinationCity, setDestinationCity] = useState('');
   const [selectedFlight,setSelectedFlight]=useState(null);
   const [passengerCount,setPassengerCount]=useState(1);
+  const [searching, setSearching] = useState(false);
 
   const searchFlights = async (event) => {
     event.preventDefault();
     try {
+      setSearching(true);
       const response = await fetch(
         `https://script.google.com/macros/s/AKfycbye6Yi_bm6nPVgZMe3q8zS4gq2LNSuaVgZyNjQ6z3vQl5HjjrMCYHYSqxqsXFnms587mg/exec?frm=${departureCity}&to=${destinationCity}`
       );
@@ -22,6 +25,8 @@ export default function Flights() {
       setShowFlightList(true);
     } catch (error) {
       console.error('Error fetching hotels:', error);
+    }finally{
+      setSearching(false);
     }
   };
 
@@ -84,7 +89,16 @@ export default function Flights() {
                         </select>
                     </div>
                 </div>
-                <button class="btn btn-primary my-3" type="submit" >Search Flights</button>
+                <button class="btn btn-primary my-3" type="submit" >
+                {searching ? (
+                  <>
+                    <Spinner animation="border" role="status" size="sm" />
+                    &nbsp;Searching...
+                  </>
+                ) : (
+                  'Search Flights'
+                )}
+                </button>
             </form>
         </div>
         <div className="col my-3 ms-1">

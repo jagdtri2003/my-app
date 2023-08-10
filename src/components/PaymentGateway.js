@@ -92,7 +92,7 @@ export default function PaymentGateway({setPaymentStatus ,onClose}) {
             {isProcessing ? (
               <>
                 <Spinner as="span" animation="border" size="sm" />
-                Processing...
+                 &nbsp;Processing...
               </>
             ) : (
               'Pay Now'

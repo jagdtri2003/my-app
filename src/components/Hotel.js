@@ -1,5 +1,6 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState} from 'react'
 import HotelCard2 from './HotelCard2';
+import { Spinner } from 'react-bootstrap';
 
 
 export default function Hotel() {
@@ -11,9 +12,11 @@ export default function Hotel() {
     const [checkInDate, setCheckInDate] = useState('');
     const [checkOutDate, setCheckOutDate] = useState('');
     const [paymentStatus, setPaymentStatus] = useState('idle');
+    const [searching,setSearching] = useState(false);
 
     const fetchHotelsFromApi = async () => {
       try {
+        setSearching(true);
         const response = await fetch(
           `https://script.google.com/macros/s/AKfycbxkZonoYDVcW_MKHro8ESK1W-1AyYu8MuCBP_g-T6CPgmzNa1BCrp5TPEC-UPXC2d6NOQ/exec?query=${searchQuery}`
         );
@@ -22,6 +25,8 @@ export default function Hotel() {
         setShowHotelList(true);
       } catch (error) {
         console.error('Error fetching hotels:', error);
+      }finally{
+        setSearching(false);
       }
     };
 
@@ -169,7 +174,14 @@ export default function Hotel() {
           </div>
         </div>
         <button type="submit" className="btn btn-primary my-3">
-            Search Hotels      
+                {searching ? (
+                  <>
+                    <Spinner animation="border" role="status" size="sm" />
+                    &nbsp;Searching...
+                  </>
+                ) : (
+                  'Search Hotels'
+                )}      
         </button>
       </form>
     </div>

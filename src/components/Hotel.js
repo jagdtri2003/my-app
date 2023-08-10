@@ -169,7 +169,7 @@ export default function Hotel() {
           </div>
         </div>
         <button type="submit" className="btn btn-primary my-3">
-            Search         
+            Search Hotels      
         </button>
       </form>
     </div>

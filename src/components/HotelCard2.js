@@ -45,7 +45,6 @@ export default function HotelCard2({hotel,checkInDate,checkOutDate ,paymentStatu
     
       try {
         await setDoc(bookingRef, bookingData);
-        console.log('Booking data saved successfully:', referenceId);
       } catch (error) {
         console.error('Error adding booking:', error);
       }

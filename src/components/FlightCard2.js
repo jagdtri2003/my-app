@@ -6,10 +6,23 @@ import { serverTimestamp,doc,setDoc } from 'firebase/firestore';
 import { db } from './Firebase';
 
 
-export default function FlightCard2({ flight, passengerCount,paymentStatus,setPaymentStatus }) {
-  const price = flight.price * parseInt(passengerCount);
+export default function FlightCard2({ flight, passengerCount,paymentStatus,setPaymentStatus,Class }) {
+
+  const calculateUpdatedPrice = () => {
+    if (Class === 'business') {
+      return flight.price * 1.5; // Increase price by 50% for business class
+    } else if (Class === 'first') {
+      return flight.price * 2; // Double the price for first class
+    } else {
+      return flight.price; // Keep the original price for economy class
+    }
+  };
+  let pr=calculateUpdatedPrice();
+  const price = pr * parseInt(passengerCount);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [refId,setRefId] = useState(""); 
+
+
 
 
   function generateReferenceId() {

@@ -12,6 +12,8 @@ export default function Flights() {
   const [selectedFlight,setSelectedFlight]=useState(null);
   const [passengerCount,setPassengerCount]=useState(1);
   const [searching, setSearching] = useState(false);
+  const [selectedCabinClass, setSelectedCabinClass] = useState('economy');
+
 
   const searchFlights = async (event) => {
     event.preventDefault();
@@ -82,7 +84,8 @@ export default function Flights() {
                     </div>
                     <div class="mr-2 mb-3">
                         <label for="inputCabinClass">Cabin Class</label>
-                        <select class="form-control" id="inputCabinClass" required>
+                        <select class="form-control" id="inputCabinClass"   value={selectedCabinClass}
+                        onChange={(e) => setSelectedCabinClass(e.target.value)} required>
                             <option value="economy">Economy</option>
                             <option value="business">Business</option>
                             <option value="first">First Class</option>
@@ -105,7 +108,7 @@ export default function Flights() {
               {selectedFlight && (
                 <div>
                   <h3>&nbsp;Selected Flight</h3>
-                  <FlightCard2 flight={selectedFlight} passengerCount={passengerCount} paymentStatus={paymentStatus} setPaymentStatus={setPaymentStatus}/>
+                  <FlightCard2 flight={selectedFlight} passengerCount={passengerCount} paymentStatus={paymentStatus} setPaymentStatus={setPaymentStatus} Class={selectedCabinClass}/>
                 </div>
               )}
         </div>

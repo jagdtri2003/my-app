@@ -2,10 +2,13 @@ import React,{useState} from 'react';
 import jsPDF from 'jspdf';
 import { Button, Spinner,Modal } from 'react-bootstrap';
 import PaymentGateway from './PaymentGateway';
+import { serverTimestamp,doc,setDoc } from 'firebase/firestore';
+import { db } from './Firebase';
 
 export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,paymentStatus,setPaymentStatus}) {
 
-    const [showPaymentModal, setShowPaymentModal] = useState(false); 
+    const [showPaymentModal, setShowPaymentModal] = useState(false);
+    const [referenceId,setReferenceId] = useState(''); 
     const startDate = new Date(checkInDate);
     const endDate = new Date(checkOutDate);
     const numberOfDays = (endDate - startDate) / (1000 * 3600 * 24); // Calculate the number of days
@@ -17,8 +20,30 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
       // Simulate payment processing
       setPaymentStatus('processing');
       setShowPaymentModal(true);
+      setReferenceId(generateReferenceId());
 
     };
+
+    //Saving to DB
+    const saveBookingDataToFirestore = async () => {    
+      const bookingRef = doc(db, 'hotels',referenceId);
+      const bookingData = {
+        hotelName: hotel.name,
+        hotelLocation: hotel.location,
+        days: numberOfDays,
+        totalPrice: hotel.price,
+        bookingTime: serverTimestamp(),
+        paymentStatus: 'success',
+      };
+    
+      try {
+        await setDoc(bookingRef, bookingData);
+        console.log('Booking data saved successfully:', referenceId);
+      } catch (error) {
+        console.error('Error adding booking:', error);
+      }
+    };    
+
   
     let buttonText;
     if (paymentStatus === 'idle') {
@@ -31,6 +56,7 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
       );
     } else if (paymentStatus === 'success') {
       buttonText = 'Payment Successful!';
+      saveBookingDataToFirestore();
     }
     function generateReferenceId() {
       const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -50,8 +76,6 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
       const formattedEndDate = endDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
       const receiptGeneratedAt = new Date().toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' });
       
-      // Generate a random number
-      const referenceId = generateReferenceId();
 
       const qrCodeImageUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(referenceId)}&size=100x100`;
 

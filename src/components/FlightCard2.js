@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { Button, Spinner,Modal } from 'react-bootstrap';
 import jsPDF from 'jspdf';
 import PaymentGateway from './PaymentGateway';
+import { serverTimestamp,doc,setDoc } from 'firebase/firestore';
+import { db } from './Firebase';
 
 
 export default function FlightCard2({ flight, passengerCount,paymentStatus,setPaymentStatus }) {
   const price = flight.price * parseInt(passengerCount);
-  const [showPaymentModal, setShowPaymentModal] = useState(false); 
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [refId,setRefId] = useState(""); 
 
 
   function generateReferenceId() {
@@ -23,10 +26,10 @@ export default function FlightCard2({ flight, passengerCount,paymentStatus,setPa
   const generatePDF = () => {
     const doc = new jsPDF();
     
-    const referenceId = generateReferenceId();
+
     const receiptGeneratedAt = new Date().toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' });
 
-    const qrCodeImageUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(referenceId)}&size=100x100`;
+    const qrCodeImageUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(refId)}&size=100x100`;
 
     // Add the QR code image to the PDF
     const img = new Image();
@@ -61,7 +64,7 @@ export default function FlightCard2({ flight, passengerCount,paymentStatus,setPa
       doc.setTextColor(0, 128, 0); // RGB color for green
       doc.text('Successful',49, 90);
       doc.setTextColor(33, 37, 41);
-      doc.text(`Reference Id: ${referenceId}`,130,90);
+      doc.text(`Reference Id: ${refId}`,130,90);
       doc.setFontSize(8);
       doc.text(`Receipt Generated At: ${receiptGeneratedAt}`, 10, 100);
 
@@ -83,15 +86,38 @@ export default function FlightCard2({ flight, passengerCount,paymentStatus,setPa
     doc.text(note, 5, 110);
       
       // Save the PDF with a random number in the name
-      doc.save(`flight_details_${referenceId}.pdf`);
+      doc.save(`flight_details_${refId}.pdf`);
     };
   }
-  
-  const handlePayNowClick = () => {
+  const handlePayNowClick = async () => {
     // Simulate payment processing
     setPaymentStatus('processing');
     setShowPaymentModal(true);
-  };
+    setRefId(generateReferenceId());
+    }
+    //Saving to DB
+    const saveBookingDataToFirestore = async () => {    
+      const bookingRef = doc(db, 'flights',refId);
+      const bookingData = {
+        flightName: flight.name,
+        flightNumber: flight.flight_number,
+        departureCity: flight.dep_city,
+        arrivalCity: flight.arrival_city,
+        departureTime: flight.dep_time,
+        passengerCount,
+        totalPrice: price,
+        bookingTime: serverTimestamp(),
+        paymentStatus: 'success',
+      };
+    
+      try {
+        await setDoc(bookingRef, bookingData);
+        console.log('Booking data saved successfully:', refId);
+      } catch (error) {
+        console.error('Error adding booking:', error);
+      }
+    };
+
 
   let buttonText;
   if (paymentStatus === 'idle') {
@@ -104,6 +130,7 @@ export default function FlightCard2({ flight, passengerCount,paymentStatus,setPa
     );
   } else if (paymentStatus === 'success') {
     buttonText = 'Payment Successful!';
+    saveBookingDataToFirestore();
   }
 
   return (

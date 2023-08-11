@@ -47,7 +47,7 @@ function App() {
     <Router>
       <>
         <Navbar title="TravelKro" />
-        <div className="container my-4">
+        <div className="container my-4" id="mainContainer">
         <Routes>
           <Route path="/" element={user ? <MainCard user={user}/> : <Navigate to="/signup" />} />
           <Route path='/signup' element={<Signup/>}/>

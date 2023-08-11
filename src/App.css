@@ -23,9 +23,6 @@
 }
 @keyframes s7 {to{transform: rotate(.5turn)}}
 
-.centered-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Adjust this if needed */
+#mainContainer {
+  min-height: calc(85vh - 79px);
 }

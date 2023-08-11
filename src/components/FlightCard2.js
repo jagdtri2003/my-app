@@ -117,6 +117,7 @@ export default function FlightCard2({ flight, passengerCount,paymentStatus,setPa
         departureCity: flight.dep_city,
         arrivalCity: flight.arrival_city,
         departureTime: flight.dep_time,
+        cabinClass:Class,
         passengerCount,
         totalPrice: price,
         bookingTime: serverTimestamp(),

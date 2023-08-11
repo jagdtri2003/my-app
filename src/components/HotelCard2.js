@@ -13,6 +13,9 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
     const endDate = new Date(checkOutDate);
     const numberOfDays = (endDate - startDate) / (1000 * 3600 * 24); // Calculate the number of days
 
+    const formattedStartDate = startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    const formattedEndDate = endDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
     const pricePerNight = parseInt(hotel.price.replace(/\D/g, ''));
     const total = pricePerNight * numberOfDays;
 
@@ -31,6 +34,8 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
         hotelName: hotel.name,
         hotelLocation: hotel.location,
         days: numberOfDays,
+        from:formattedStartDate,
+        to:formattedEndDate,
         totalPrice: hotel.price,
         bookingTime: serverTimestamp(),
         paymentStatus: 'success',
@@ -72,8 +77,7 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
     const generatePDF = () => {
 
       const doc = new jsPDF();
-      const formattedStartDate = startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-      const formattedEndDate = endDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
       const receiptGeneratedAt = new Date().toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' });
       
 

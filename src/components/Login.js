@@ -62,7 +62,7 @@ const Login = () => {
                   />
                 </div>
                 <div className='mb-2 text-danger'>
-                    {error}
+                    {error.substring(9,error.length)}
                 </div>
                 <button type="submit" className="btn btn-primary">Login</button>
               </form>

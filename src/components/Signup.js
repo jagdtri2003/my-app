@@ -84,7 +84,7 @@ const Signup = () => {
                   />
                 </div>
                 <div className='text-danger'>
-                    {error}
+                      {error.substring(9,error.length)}
                 </div>
                 <button type="submit" className="btn btn-primary">Sign Up</button>
               </form>

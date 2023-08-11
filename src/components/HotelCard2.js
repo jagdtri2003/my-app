@@ -5,7 +5,7 @@ import PaymentGateway from './PaymentGateway';
 import { serverTimestamp,doc,setDoc } from 'firebase/firestore';
 import { db } from './Firebase';
 
-export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,paymentStatus,setPaymentStatus}) {
+export default function HotelCard2({hotel,checkInDate,checkOutDate ,paymentStatus,setPaymentStatus,numberOfRoom}) {
 
     const [showPaymentModal, setShowPaymentModal] = useState(false);
     const [referenceId,setReferenceId] = useState(''); 
@@ -17,7 +17,8 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
     const formattedEndDate = endDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
     const pricePerNight = parseInt(hotel.price.replace(/\D/g, ''));
-    const total = pricePerNight * numberOfDays;
+    numberOfRoom = parseInt(numberOfRoom);
+    const total = pricePerNight * numberOfDays *numberOfRoom;
 
     const handlePayNowClick = () => {
       // Simulate payment processing
@@ -36,9 +37,10 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
         days: numberOfDays,
         from:formattedStartDate,
         to:formattedEndDate,
-        totalPrice: hotel.price,
+        numberOfRoom,
+        totalPrice: total,
         bookingTime: serverTimestamp(),
-        paymentStatus: 'success',
+        paymentStatus: 'Success',
       };
     
       try {
@@ -101,7 +103,7 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
         doc.line(titleX, titleY + 2, titleX + titleWidth, titleY + 2);
         
         doc.setDrawColor(52, 58, 64);
-        doc.rect(5,5,200,100, 'S');
+        doc.rect(5,5,200,110, 'S');
         doc.setFontSize(14);
         doc.setTextColor(33, 37, 41);
         doc.setFont('helvetica', 'normal');
@@ -110,14 +112,15 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
         doc.text(`Number of Days: ${numberOfDays}`, 10, 50);
         doc.text(`From Date: ${formattedStartDate}`, 10, 60);
         doc.text(`To Date: ${formattedEndDate}`, 10, 70);
-        doc.text(`Total Price:${total} Rs`, 10, 80);
-        doc.text('Payment Status: ',10,90);
+        doc.text(`Number of Room: ${numberOfRoom}`,10,80);
+        doc.text(`Total Price:${total} Rs`, 10, 90);
+        doc.text('Payment Status: ',10,100);
         doc.setTextColor(0, 128, 0); // RGB color for green
-        doc.text('Successful',49, 90);
+        doc.text('Successful',49, 100);
         doc.setTextColor(33, 37, 41);
         doc.text(`Reference Id: ${referenceId}`,130,90);
         doc.setFontSize(8);
-        doc.text(`Receipt Generated At: ${receiptGeneratedAt}`, 10, 100);
+        doc.text(`Receipt Generated At: ${receiptGeneratedAt}`, 10, 110);
 
         const note = `
         Dear Valued Guest,
@@ -131,7 +134,7 @@ export default function HotelCard2({hotel,buttontxt,checkInDate,checkOutDate ,pa
       `;
       doc.setFontSize(10);
       doc.setTextColor(33, 37, 41);
-      doc.text(note,3, 110);
+      doc.text(note,3, 117);
         
         // Save the PDF with a random number in the name
         doc.save(`hotel_details_${referenceId}.pdf`);

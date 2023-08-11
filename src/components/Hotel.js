@@ -13,6 +13,7 @@ export default function Hotel() {
     const [checkOutDate, setCheckOutDate] = useState('');
     const [paymentStatus, setPaymentStatus] = useState('idle');
     const [searching,setSearching] = useState(false);
+    const [numberOfRoom,setNumberOfRoom] = useState(1);
 
     const fetchHotelsFromApi = async () => {
       try {
@@ -136,11 +137,15 @@ export default function Hotel() {
             />
           </div>
           <div className=" mb-3">
-            <label htmlFor="inputGuestCount">Number of Guests</label>
+            <label htmlFor="inputGuestCount">Number of Rooms</label>
             <input
               type="number"
               className="form-control"
               id="inputGuestCount"
+              value={numberOfRoom}
+              onChange={(e)=>{
+                  setNumberOfRoom(e.target.value);
+              }}
               min="1"
               required
             />
@@ -161,7 +166,7 @@ export default function Hotel() {
             </select>
           </div>
         </div>
-        <div className="form-col">
+        {/* <div className="form-col">
           <div className=" mb-3">
             <label htmlFor="inputPhone">Phone Number</label>
             <input
@@ -172,7 +177,7 @@ export default function Hotel() {
               required
             />
           </div>
-        </div>
+        </div> */}
         <button type="submit" className="btn btn-primary my-3">
                 {searching ? (
                   <>
@@ -189,7 +194,7 @@ export default function Hotel() {
               {selectedHotel && (
                 <div>
                   <h3>&nbsp;Selected Hotel</h3>
-                  <HotelCard2 hotel={selectedHotel} buttontxt="Pay Now" checkInDate={checkInDate} checkOutDate={checkOutDate} paymentStatus={paymentStatus} setPaymentStatus={setPaymentStatus} />
+                  <HotelCard2 hotel={selectedHotel} buttontxt="Pay Now" checkInDate={checkInDate} checkOutDate={checkOutDate} paymentStatus={paymentStatus} setPaymentStatus={setPaymentStatus} numberOfRoom={numberOfRoom}/>
                 </div>
               )}
     </div>

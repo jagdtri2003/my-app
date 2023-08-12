@@ -19,8 +19,8 @@ export default function Footer() {
                 <a className="btn btn-outline-light btn-floating m-1 text-white" role="button" href='https://www.linkedin.com/in/jagdamba-tripathi/' target="_blank">
                   <i className="fab fa-linkedin"></i>
                 </a>
-                <a className="btn btn-outline-light btn-floating m-1 text-white" role="button">
-                  <i className="fab fa-twitter"></i>
+                <a className="btn btn-outline-light btn-floating m-1 text-white" role="button" href=''>
+                  <i class="fa-brands fa-telegram"></i>
                 </a>
                 <a className="btn btn-outline-light btn-floating m-1 text-white" role="button">
                   <i className="fab fa-google"></i>

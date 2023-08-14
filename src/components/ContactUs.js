@@ -7,8 +7,7 @@ export default function ContactUs() {
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [Message,setMessage]=useState("");
-
-
+  
   const handleSubmit = (e) =>{
     e.preventDefault();
     const rand=Math.round(Math.random()*100000)

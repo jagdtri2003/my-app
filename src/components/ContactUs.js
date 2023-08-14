@@ -1,6 +1,28 @@
-import React from 'react';
+import { serverTimestamp,doc,setDoc } from 'firebase/firestore';
+import React,{useState} from 'react';
+import { db } from './Firebase';
 
 export default function ContactUs() {
+
+  const [Name, setName] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Message,setMessage]=useState("");
+
+
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+    const rand=Math.round(Math.random()*100000)
+    const path=doc(db,"message",Email.concat(rand));
+    const data={
+      Name:Name,
+      Email:Email,
+      Message:Message,
+      date:serverTimestamp()
+    }
+    setDoc(path,data);
+  }
+
+
   document.title="TravelKro-Contact Us";
   return (
     <div className="container mt-5">
@@ -18,18 +40,18 @@ export default function ContactUs() {
       <div className="row mt-4">
         <div className="col-lg-6 my-3">
           <h3>Contact Form</h3>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="name" className="form-label">Name</label>
-              <input type="text" className="form-control" id="name" />
+              <input type="text" className="form-control" id="name" value={Name} onChange={(e)=>setName(e.target.value)} />
             </div>
             <div className="mb-3">
               <label htmlFor="email" className="form-label">Email</label>
-              <input type="email" className="form-control" id="email" />
+              <input type="email" className="form-control" id="email" value={Email} onChange={(e)=>setEmail(e.target.value)} />
             </div>
             <div className="mb-3">
               <label htmlFor="message" className="form-label">Message</label>
-              <textarea className="form-control" id="message" rows="4"></textarea>
+              <textarea className="form-control" id="message" rows="4" value={Message} onChange={(e)=>setMessage(e.target.value)}></textarea>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
           </form>

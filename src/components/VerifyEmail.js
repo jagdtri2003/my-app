@@ -12,7 +12,7 @@ export default function VerifyEmail({user}) {
     const lastSentTimestamp = parseInt(localStorage.getItem('lastSentTimestamp'), 10) || 0;
     const currentTime = new Date().getTime();
     const timeSinceLastSent = currentTime - lastSentTimestamp;
-    const rateLimitTimeRange = 600000; // 1 minute
+    const rateLimitTimeRange = 600000000; // 1 minute
 
     if (timeSinceLastSent >= rateLimitTimeRange) {
       // Simulating email sent for demonstration purposes

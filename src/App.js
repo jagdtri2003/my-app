@@ -20,6 +20,7 @@ function App() {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       if (authUser) {
         setUser(authUser);
+        localStorage.setItem("displayName",authUser.displayName);
       } else {
         setUser(null);
       }
@@ -41,7 +42,6 @@ function App() {
       </div>  
     );
   }
-
 
   return (
     <Router>

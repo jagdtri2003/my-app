@@ -4,8 +4,15 @@ import Hotel from './Hotel'
 import { Container } from 'react-bootstrap';
 import { signOut } from 'firebase/auth';
 import { auth } from './Firebase';
+import VerifyEmail from './VerifyEmail';
 
 export default function MainCard({user}) {
+
+  if(!user.emailVerfied){
+    return(
+      <VerifyEmail user={user}/>
+    );
+  }  
 
   const SignOut =()=>{
     signOut(auth);

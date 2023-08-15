@@ -11,6 +11,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import React,{useEffect,useState} from 'react';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import ForgotPassword from './components/ForgotPassword';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -54,6 +55,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route exact path="/forgot-password" element={<ForgotPassword/>} />
         </Routes>
         </div>
         <Footer/>

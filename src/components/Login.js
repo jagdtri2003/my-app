@@ -68,6 +68,9 @@ const Login = () => {
               </form>
               <p className="mt-3">
                 Don't have an account? <Link to="/signup">Sign Up</Link>
+                &nbsp;
+                {' | '}&nbsp;&nbsp;
+                <Link to="/forgot-password">Forgot Password ?</Link>
               </p>
             </div>
           </div>

@@ -8,7 +8,6 @@ import VerifyEmail from './VerifyEmail';
 
 export default function MainCard({user}) {
 
-
   const SignOut =()=>{
     signOut(auth);
   }
@@ -43,7 +42,7 @@ export default function MainCard({user}) {
       </Container></div>
       </div>
     </div>
-    :<VerifyEmail/>}
+    :<VerifyEmail user={user}/>}
     </>
   )
 }

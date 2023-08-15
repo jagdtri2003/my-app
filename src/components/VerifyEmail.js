@@ -1,18 +1,16 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { sendEmailVerification } from 'firebase/auth';
-import { Container, Row, Col, Alert,Button } from 'react-bootstrap';
+import { Container, Row, Col, Alert, Button } from 'react-bootstrap';
 
-
-export default function VerifyEmail({user}) {
-
+export default function VerifyEmail({ user }) {
   const [emailSent, setEmailSent] = useState(false);
   const [remainingTime, setRemainingTime] = useState(0);
 
-  const handleResendVerification = async () => {  
+  const handleResendVerification = async () => {
     const lastSentTimestamp = parseInt(localStorage.getItem('lastSentTimestamp'), 10) || 0;
     const currentTime = new Date().getTime();
     const timeSinceLastSent = currentTime - lastSentTimestamp;
-    const rateLimitTimeRange = 600000000; // 1 minute
+    const rateLimitTimeRange = 600000; // 10 minutes in milliseconds
 
     if (timeSinceLastSent >= rateLimitTimeRange) {
       // Simulating email sent for demonstration purposes
@@ -26,9 +24,12 @@ export default function VerifyEmail({user}) {
         console.error('Error sending email:', error);
       }
     } else {
-      const remainingSeconds = Math.ceil((rateLimitTimeRange - timeSinceLastSent) / 1000);
-      setRemainingTime(remainingSeconds);
-      console.log(`You can send another email in ${remainingSeconds} seconds.`);
+      const remainingMilliseconds = rateLimitTimeRange - timeSinceLastSent;
+      const remainingMinutes = Math.floor(remainingMilliseconds / 60000); // 1 minute = 60000 milliseconds
+      const remainingSeconds = Math.floor((remainingMilliseconds % 60000) / 1000);
+
+      setRemainingTime({ minutes: remainingMinutes, seconds: remainingSeconds });
+      console.log(`You can send another email in ${remainingMinutes} minutes and ${remainingSeconds} seconds.`);
     }
   };
 
@@ -39,18 +40,20 @@ export default function VerifyEmail({user}) {
           <Alert variant={emailSent ? 'success' : 'danger'}>
             <h4>{emailSent ? 'Email Sent!' : 'Account Not Verified'}</h4>
             {emailSent ? (
-              <p className="text-success">We've sent you a verification email to {user.email} . Please check your inbox.</p>
+              <p className="text-success">We've sent you a verification email to {user.email}. Please check your inbox.</p>
             ) : (
               <div>
                 <p>Your <b>TravelKro</b> account has not been verified yet.</p>
                 <p>To continue enjoying a seamless travelling experience with TravelKro, please verify your email. Check your inbox for a verification link or click the button below to resend the verification email.</p>
                 <Button variant="primary" onClick={handleResendVerification}>Resend Verification Email</Button>
-                {remainingTime>0 &&<p className='mt-2'>Please wait {remainingTime} seconds before sending another email.</p>}
+                {remainingTime.minutes > 0 && (
+                  <p className="mt-2">Please wait {remainingTime.minutes} minutes and {remainingTime.seconds} seconds before sending another email.</p>
+                )}
               </div>
             )}
           </Alert>
         </Col>
       </Row>
     </Container>
-  )
+  );
 }

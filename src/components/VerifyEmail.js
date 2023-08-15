@@ -42,8 +42,8 @@ export default function VerifyEmail({user}) {
               <p className="text-success">We've sent you a verification email to {user.email} . Please check your inbox.</p>
             ) : (
               <div>
-                <p>Your Travelkro account has not been verified yet.</p>
-                <p>To continue enjoying a seamless travelling experience with Travelkro, please verify your email. Check your inbox for a verification link or click the button below to resend the verification email.</p>
+                <p>Your <b>TravelKro</b> account has not been verified yet.</p>
+                <p>To continue enjoying a seamless travelling experience with TravelKro, please verify your email. Check your inbox for a verification link or click the button below to resend the verification email.</p>
                 <Button variant="primary" onClick={handleResendVerification}>Resend Verification Email</Button>
                 {remainingTime>0 &&<p className='mt-2'>Please wait {remainingTime} seconds before sending another email.</p>}
               </div>

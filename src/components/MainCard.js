@@ -8,7 +8,7 @@ import VerifyEmail from './VerifyEmail';
 
 export default function MainCard({user}) {
 
-  if(!user.emailVerfied){
+  if(!user.emailVerified){
     return(
       <VerifyEmail user={user}/>
     );

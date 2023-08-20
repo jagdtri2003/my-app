@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { auth } from './Firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+
 
 const profileLogoUrl = "https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black-thumbnail.png";
 
 export default function Navbar(props) {
   const [collapseOpen, setCollapseOpen] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(()=>{
+    onAuthStateChanged(auth,(authUser)=>{
+      // console.log(authUser);
+      setUser(authUser);
+    })
+  })
 
   const handleCollapseToggle = () => {
     setCollapseOpen(!collapseOpen);
@@ -48,7 +59,7 @@ export default function Navbar(props) {
             </li>
           </ul>
         </div>
-        {!collapseOpen && (
+        {!collapseOpen && user && (
           <div className="order-3">
             <img title="My Profile" src={profileLogoUrl} alt="Profile" style={{ width: '30px', height: '30px',borderRadius: '50%' }} />
           </div>

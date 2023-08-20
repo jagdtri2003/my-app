@@ -28,7 +28,7 @@ function App() {
       setInterval(() => {
         setLoading(false);
       },250);
-      
+  
     });
 
     return () => unsubscribe();

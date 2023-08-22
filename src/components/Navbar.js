@@ -61,8 +61,11 @@ export default function Navbar(props) {
         </div>
         {!collapseOpen && user && (
           <div className="order-3">
+            <a href='/profile'>
             <img title="My Profile" src={profileLogoUrl} alt="Profile" style={{ width: '30px', height: '30px',borderRadius: '50%' }} />
+            </a>
           </div>
+          
         )}
       </div>
     </nav>

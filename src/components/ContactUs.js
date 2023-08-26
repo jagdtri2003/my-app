@@ -19,6 +19,9 @@ export default function ContactUs() {
       date:serverTimestamp()
     }
     setDoc(path,data);
+    setName("");
+    setEmail("");
+    setMessage("");
   }
 
 

@@ -10,6 +10,7 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [loggein,setLoggedin]=useState(false);
   const [error, setError] = useState('');
+  const [gender, setGender] = useState('');
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -83,7 +84,38 @@ const Signup = () => {
                     required
                   />
                 </div>
-                <div className='text-danger'>
+                <div className="mb-3">
+                <label htmlFor='gender'>Gender</label>
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="gender"
+                      id="male"
+                      value="male"
+                      checked={gender === 'male'}
+                      onChange={() => setGender('male')}
+                    />
+                    <label className="form-check-label" htmlFor="male">
+                      Male
+                    </label>
+                  </div>
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="gender"
+                      id="female"
+                      value="female"
+                      checked={gender === 'female'}
+                      onChange={() => setGender('female')}
+                    />
+                    <label className="form-check-label" htmlFor="female">
+                      Female
+                    </label>
+                  </div>
+                </div>
+                <div className='text-danger mb-3'>
                       {error.substring(9,error.length)}
                 </div>
                 <button type="submit" className="btn btn-primary">Sign Up</button>

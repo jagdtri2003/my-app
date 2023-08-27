@@ -140,6 +140,18 @@ export default function FlightCard2({ flight, passengerCount,paymentStatus,setPa
         };
         try {
           await setDoc(bookingRef, bookingData);
+          const bookingTime = new Date(bookingData.bookingTime.toDate());
+
+          // Format the date and time
+          const formattedBookingTime = bookingTime.toLocaleString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+          });
+          bookingData.bookingTime=formattedBookingTime;
           const response = await fetch('https://server-travelkro.vercel.app/flight', {
             method: 'POST',
             headers: {

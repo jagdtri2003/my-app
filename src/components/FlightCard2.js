@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Button, Spinner,Modal } from 'react-bootstrap';
 import jsPDF from 'jspdf';
 import PaymentGateway from './PaymentGateway';
 import { serverTimestamp,doc,setDoc } from 'firebase/firestore';
 import { db } from './Firebase';
-
+import { auth } from './Firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 
 export default function FlightCard2({ flight, passengerCount,paymentStatus,setPaymentStatus,Class }) {
+
+  const [user, setUser] = useState(null);
+  const [datasaved, setDatasaved] = useState(false);
+
+  onAuthStateChanged(auth,(authUser)=>{
+    if(authUser){
+      setUser(authUser);
+      // console.log(user);
+    }
+  })
 
   const calculateUpdatedPrice = () => {
     if (Class === 'business') {
@@ -107,29 +118,42 @@ export default function FlightCard2({ flight, passengerCount,paymentStatus,setPa
     setPaymentStatus('processing');
     setShowPaymentModal(true);
     setRefId(generateReferenceId());
-    }
+  };
     //Saving to DB
-    const saveBookingDataToFirestore = async () => {    
-      const bookingRef = doc(db, 'flights',refId);
-      const bookingData = {
-        flightName: flight.name,
-        flightNumber: flight.flight_number,
-        departureCity: flight.dep_city,
-        arrivalCity: flight.arrival_city,
-        departureTime: flight.dep_time,
-        cabinClass:Class,
-        passengerCount,
-        totalPrice: price,
-        bookingTime: serverTimestamp(),
-        paymentStatus: 'success',
-      };
-    
-      try {
-        await setDoc(bookingRef, bookingData);
-        console.log('Booking data saved successfully:', refId);
-      } catch (error) {
-        console.error('Error adding booking:', error);
-      }
+    const saveBookingDataToFirestore = async () => {
+      if(!datasaved){
+        const bookingRef = doc(db, 'flights',refId);
+        const bookingData = {
+          userEmail:user.email,
+          username:user.displayName,
+          flightName: flight.name,
+          flightNumber: flight.flight_number,
+          departureCity: flight.dep_city,
+          arrivalCity: flight.arrival_city,
+          departureTime: flight.dep_time,
+          cabinClass:Class,
+          passengerCount,
+          totalPrice: price,
+          referenceId:refId,
+          bookingTime: serverTimestamp(),
+          paymentStatus: 'success',
+        };
+        try {
+          await setDoc(bookingRef, bookingData);
+          const response = await fetch('https://server-travelkro.vercel.app/flight', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bookingData)
+          });
+          console.log('Booking data saved successfully:', refId);
+          console.log(response);
+          setDatasaved(true);
+        } catch (error) {
+          console.error('Error adding booking:', error);
+        }
+      }    
     };
 
 
@@ -144,8 +168,12 @@ export default function FlightCard2({ flight, passengerCount,paymentStatus,setPa
     );
   } else if (paymentStatus === 'success') {
     buttonText = 'Payment Successful!';
-    saveBookingDataToFirestore();
   }
+  useEffect(() => {
+    if (paymentStatus === 'success' && !datasaved) {
+      saveBookingDataToFirestore();
+    }
+  }, [paymentStatus, datasaved]);
 
   return (
     <div className="card mb-3">

@@ -139,9 +139,8 @@ export default function FlightCard2({ flight, passengerCount,paymentStatus,setPa
           paymentStatus: 'success',
         };
         try {
+          const bookingTime = new Date();
           await setDoc(bookingRef, bookingData);
-          const bookingTime = new Date(bookingData.bookingTime.toDate());
-
           // Format the date and time
           const formattedBookingTime = bookingTime.toLocaleString('en-US', {
             year: 'numeric',

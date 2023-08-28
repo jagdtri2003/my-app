@@ -1,9 +1,10 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import jsPDF from 'jspdf';
 import { Button, Spinner,Modal } from 'react-bootstrap';
 import PaymentGateway from './PaymentGateway';
 import { serverTimestamp,doc,setDoc } from 'firebase/firestore';
 import { db } from './Firebase';
+import { auth } from './Firebase';
 
 export default function HotelCard2({hotel,checkInDate,checkOutDate ,paymentStatus,setPaymentStatus,numberOfRoom}) {
 
@@ -12,6 +13,14 @@ export default function HotelCard2({hotel,checkInDate,checkOutDate ,paymentStatu
     const startDate = new Date(checkInDate);
     const endDate = new Date(checkOutDate);
     const numberOfDays = (endDate - startDate) / (1000 * 3600 * 24); // Calculate the number of days
+    const [user, setUser] = useState(null);
+    const [datasaved, setDatasaved] = useState(false);
+
+    onAuthStateChanged(auth,(authUser)=>{
+      if(authUser){
+        setUser(authUser);
+      }
+    })
 
     const formattedStartDate = startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     const formattedEndDate = endDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -32,6 +41,8 @@ export default function HotelCard2({hotel,checkInDate,checkOutDate ,paymentStatu
     const saveBookingDataToFirestore = async () => {    
       const bookingRef = doc(db, 'hotels',referenceId);
       const bookingData = {
+        userEmail:user.email,
+        username:user.displayName,
         hotelName: hotel.name,
         hotelLocation: hotel.location,
         days: numberOfDays,
@@ -41,10 +52,32 @@ export default function HotelCard2({hotel,checkInDate,checkOutDate ,paymentStatu
         totalPrice: total,
         bookingTime: serverTimestamp(),
         paymentStatus: 'Success',
+        referenceId:referenceId,
       };
     
       try {
+        const bookingTime = new Date();
         await setDoc(bookingRef, bookingData);
+        const formattedBookingTime = bookingTime.toLocaleString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          second: 'numeric',
+        });
+        bookingData.bookingTime=formattedBookingTime;
+        const response = await fetch('https://server-travelkro.vercel.app/hotel', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(bookingData)
+        });
+        console.log('Booking data saved successfully:', refId);
+        console.log(response);
+        setDatasaved(true);
+
       } catch (error) {
         console.error('Error adding booking:', error);
       }
@@ -62,8 +95,14 @@ export default function HotelCard2({hotel,checkInDate,checkOutDate ,paymentStatu
       );
     } else if (paymentStatus === 'success') {
       buttonText = 'Payment Successful!';
-      saveBookingDataToFirestore();
     }
+
+    useEffect(() => {
+      if (paymentStatus === 'success' && !datasaved) {
+        saveBookingDataToFirestore();
+      }
+    }, [paymentStatus, datasaved]);
+
     function generateReferenceId() {
       const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       const length = 8; // Set the desired length of the reference ID

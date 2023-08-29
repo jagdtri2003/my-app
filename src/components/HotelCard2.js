@@ -5,6 +5,7 @@ import PaymentGateway from './PaymentGateway';
 import { serverTimestamp,doc,setDoc } from 'firebase/firestore';
 import { db } from './Firebase';
 import { auth } from './Firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 
 export default function HotelCard2({hotel,checkInDate,checkOutDate ,paymentStatus,setPaymentStatus,numberOfRoom}) {
 
@@ -74,7 +75,7 @@ export default function HotelCard2({hotel,checkInDate,checkOutDate ,paymentStatu
           },
           body: JSON.stringify(bookingData)
         });
-        console.log('Booking data saved successfully:', refId);
+        console.log('Booking data saved successfully:', referenceId);
         console.log(response);
         setDatasaved(true);
 

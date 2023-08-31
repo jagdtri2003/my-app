@@ -7,6 +7,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [loggein, setLoggedin] = useState(false);
   const [error, setError] = useState('');
+  const [eye, setEye] = useState('fa-solid fa-eye');
   
 
   const handleLogin = (e) => {
@@ -30,6 +31,15 @@ const Login = () => {
     return <Navigate to="/"/>
   }
 
+  const togglePassword = ()=>{
+    document.getElementById("password").type=document.getElementById("password").type=="password"?"text":"password";
+    if(eye=="fa-solid fa-eye"){
+      setEye('fa-solid fa-eye-slash');
+    }else{
+      setEye('fa-solid fa-eye');
+    }   
+  }
+
 
   return (
     <div className="container mt-4">
@@ -50,7 +60,7 @@ const Login = () => {
                     required
                   />
                 </div>
-                <div className="mb-3">
+                <div className="mb-3" style={{ position: "relative" }}>
                   <label htmlFor="password" className="form-label">Password</label>
                   <input
                     type="password"
@@ -59,7 +69,13 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                  />
+                  /><i class={eye} id="show" onClick={togglePassword} style={{
+                    position: "absolute",
+                    right: "10px",
+                    top: "71%",
+                    transform: "translateY(-50%)",
+                    cursor: "pointer",
+                  }}></i>
                 </div>
                 <div className='mb-2 text-danger'>
                     {error.substring(9,error.length)}

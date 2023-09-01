@@ -50,6 +50,7 @@ const Login = () => {
               <h2 className="card-title mb-4">Login</h2>
               <form onSubmit={handleLogin}>
                 <div className="mb-3">
+                  <i className="fa-regular fa-envelope"></i>&nbsp;
                   <label htmlFor="email" className="form-label">Email</label>
                   <input
                     type="email"
@@ -61,6 +62,7 @@ const Login = () => {
                   />
                 </div>
                 <div className="mb-3" style={{ position: "relative" }}>
+                  <i className="fa-regular fa-lock"></i>&nbsp;
                   <label htmlFor="password" className="form-label">Password</label>
                   <input
                     type="password"

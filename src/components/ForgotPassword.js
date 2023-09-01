@@ -27,6 +27,7 @@ export default function ForgotPassword() {
                 ) : (
                   <form onSubmit={handleResetPassword}>
                     <div className="mb-3">
+                      <i className="fa-regular fa-envelope"></i>&nbsp;
                       <label htmlFor="email" className="form-label">Email</label>
                       <input
                         type="email"

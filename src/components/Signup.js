@@ -62,6 +62,7 @@ const Signup = () => {
               <h2 className="card-title mb-4">Sign Up</h2>
               <form onSubmit={handleSignup}>
                 <div className="mb-3">
+                  <i className="fa-regular fa-input-text"></i>&nbsp;
                   <label htmlFor="name" className="form-label">Name</label>
                   <input
                     type="text"
@@ -73,6 +74,7 @@ const Signup = () => {
                   />
                 </div>
                 <div className="mb-3">
+                  <i className="fa-regular fa-envelope"></i>&nbsp;
                   <label htmlFor="email" className="form-label">Email</label>
                   <input
                     type="email"
@@ -84,6 +86,7 @@ const Signup = () => {
                   />
                 </div>
                 <div className="mb-3" style={{ position: "relative" }}>
+                <i className="fa-regular fa-lock"></i>&nbsp;
                   <label htmlFor="password" className="form-label">Password</label>
                   <input
                     type="password"
@@ -92,7 +95,8 @@ const Signup = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                  /><i class={eye} id="show" onClick={togglePassword} style={{
+                  />
+                  <i className={eye} id="show" onClick={togglePassword} style={{
                     position: "absolute",
                     right: "10px",
                     top: "71%",

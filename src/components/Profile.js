@@ -40,7 +40,7 @@ export default function Profile() {
             <img src="https://img.lovepik.com/element/45001/3052.png_300.png" className="card-img-topright ms-3" style={{height:'100px',width:"100px",borderRadius:"50%"}} />
             <div className="card-body">
                 <h4 className="card-title">{user.displayName}
-                {(user.uid==="9pC2jjuKalUriFU7uucmCCgGORr1" || user.uid==="2IoMMKBEgaRN2pvToZR0fAp3sgo2" || user.uid==="E8fSTnd0uOc59lnF99fMPAAkEGV2")&&<i class="fa-solid fa-badge-check" style={{color: "lightblue"}}></i>
+                {(user.uid==="9pC2jjuKalUriFU7uucmCCgGORr1" || user.uid==="2IoMMKBEgaRN2pvToZR0fAp3sgo2" || user.uid==="E8fSTnd0uOc59lnF99fMPAAkEGV2")&&<i class="fa-solid fa-badge-check" title="Verified User" style={{color: "#0d6efd"}}></i>
                 }
                 </h4>
                 <p className="card-text">{user.email}&nbsp;{!user.emailVerified && (" [Unverified]")}</p>

@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes,Navigate } from 'react-router-do
 import About from './components/About';
 import ContactUs from './components/ContactUs';
 import Footer from './components/Footer';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+// import '@fortawesome/fontawesome-free/css/all.min.css';
 import {auth} from './components/Firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import React,{useEffect,useState} from 'react';

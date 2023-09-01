@@ -32,8 +32,8 @@ const Login = () => {
   }
 
   const togglePassword = ()=>{
-    document.getElementById("password").type=document.getElementById("password").type=="password"?"text":"password";
-    if(eye=="fa-solid fa-eye"){
+    document.getElementById("password").type=document.getElementById("password").type==="password"?"text":"password";
+    if(eye==="fa-solid fa-eye"){
       setEye('fa-solid fa-eye-slash');
     }else{
       setEye('fa-solid fa-eye');

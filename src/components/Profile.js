@@ -39,7 +39,10 @@ export default function Profile() {
             <h2 className='my-3 mx-auto'>User Profile</h2>
             <img src="https://img.lovepik.com/element/45001/3052.png_300.png" className="card-img-topright ms-3" style={{height:'100px',width:"100px",borderRadius:"50%"}} />
             <div className="card-body">
-                <h4 className="card-title">{user.displayName}</h4>
+                <h4 className="card-title">{user.displayName}
+                {(user.uid==="9pC2jjuKalUriFU7uucmCCgGORr1" || user.uid==="2IoMMKBEgaRN2pvToZR0fAp3sgo2" || user.uid==="E8fSTnd0uOc59lnF99fMPAAkEGV2")&&<i class="fa-solid fa-badge-check" style={{color: "lightblue"}}></i>
+                }
+                </h4>
                 <p className="card-text">{user.email}&nbsp;{user.emailVerified && (<img src='https://e7.pngegg.com/pngimages/341/867/png-clipart-white-check-with-green-background-illustration-fingerprint-comcast-circle-symbol-technology-tick-miscellaneous-angle.png' style={{height:'20px',width:"20px",borderRadius:"50%"}}/> )}</p>
                 <p className="card-text">Registered: {user.metadata.creationTime}</p>
                 <p className="card-text">UID: {user.uid}</p>

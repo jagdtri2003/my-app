@@ -35,6 +35,7 @@ export default function Profile() {
       }
   
       updateProfile(user,{ displayName: newName }).then(() => {
+        localStorage.setItem('displayName',newName);
         setIsEditing(false);
       });
     };
@@ -86,17 +87,17 @@ export default function Profile() {
                 <p className="card-text">{user.email}&nbsp;{!user.emailVerified && (" [Unverified]")}</p>
                 <p className="card-text">Registered: {user.metadata.creationTime}</p>
                 <p className="card-text">UID: {user.uid}</p>
-  
-                {isEditing ? (
-                  <Button onClick={saveEditedName}>Save</Button>
-                ) : (
-                  <Button onClick={handleNameEdit}>Update Profile</Button> 
-                )}
-                &nbsp;&nbsp;
+                
                 <Button variant='danger' onClick={() => {
                   signOut(auth);
                   return <Navigate to="/login" />;
                 }}>SignOut</Button>
+                &nbsp;&nbsp;
+                {isEditing ? (
+                  <Button onClick={saveEditedName}>Save</Button>
+                ) : (
+                  <Button onClick={handleNameEdit}>Update Profile</Button> 
+                )}                
               </div>
             </div>
           </div>

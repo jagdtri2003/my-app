@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from './Firebase';
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from './Firebase';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUser, FaLock, FaGoogle, FaFacebook } from 'react-icons/fa';
 
@@ -20,6 +20,19 @@ export default function Login() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      navigate('/');
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    setError('');
+    
+    try {
+      await signInWithPopup(auth, googleProvider);
       navigate('/');
     } catch (error) {
       setError(error.message);
@@ -88,10 +101,14 @@ export default function Login() {
         </div>
 
         <div className="social-login">
-          <button className="social-button google">
+          <button 
+            className="social-button google" 
+            onClick={handleGoogleSignIn}
+            disabled={loading}
+          >
             <FaGoogle /> Google
           </button>
-          <button className="social-button facebook">
+          <button className="social-button facebook" disabled>
             <FaFacebook /> Facebook
           </button>
         </div>

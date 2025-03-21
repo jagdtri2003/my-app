@@ -59,6 +59,7 @@ export default function Footer() {
       <div className="footer-bottom">
         <div className="container">
           <p>&copy; {new Date().getFullYear()} TravelKro. All rights reserved.</p>
+          <p>Made with ❤️ by Jagdamba Tripathi</p>
         </div>
       </div>
     </footer>

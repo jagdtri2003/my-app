@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from './Firebase';
+import { createUserWithEmailAndPassword, updateProfile, signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from './Firebase';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUser, FaLock, FaEnvelope, FaGoogle, FaFacebook } from 'react-icons/fa';
 
@@ -57,6 +57,25 @@ export default function Register() {
       localStorage.setItem('displayName', formData.name);
       
       // Navigate to home page
+      navigate('/');
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignUp = async () => {
+    setLoading(true);
+    setError('');
+    
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      
+      // Save the display name to localStorage if available
+      if (result.user.displayName) {
+        localStorage.setItem('displayName', result.user.displayName);
+      }
+      
       navigate('/');
     } catch (error) {
       setError(error.message);
@@ -152,10 +171,14 @@ export default function Register() {
         </div>
 
         <div className="social-login">
-          <button className="social-button google">
+          <button 
+            className="social-button google"
+            onClick={handleGoogleSignUp}
+            disabled={loading}
+          >
             <FaGoogle /> Google
           </button>
-          <button className="social-button facebook">
+          <button className="social-button facebook" disabled>
             <FaFacebook /> Facebook
           </button>
         </div>

@@ -1517,18 +1517,56 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.social-button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.4s ease-in-out;
+}
+
+.social-button:hover:before {
+  left: 100%;
+}
+
+.social-button.google {
+  border-color: #ea4335;
+  color: #ea4335;
 }
 
 .social-button.google:hover {
   background-color: #ea4335;
   color: white;
-  border-color: #ea4335;
+}
+
+.social-button.facebook {
+  border-color: #1877f2;
+  color: #1877f2;
 }
 
 .social-button.facebook:hover {
   background-color: #1877f2;
   color: white;
-  border-color: #1877f2;
+}
+
+.social-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #f3f4f6;
+  border-color: #e5e7eb;
+  color: #9ca3af;
+}
+
+.social-button:disabled:before,
+.social-button:disabled:hover {
+  display: none;
 }
 
 .auth-footer {

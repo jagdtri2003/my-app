@@ -1,38 +1,66 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
 export default function Footer() {
   return (
-    <div className="container mt-auto rounded ">
-      <footer className="text-center text-lg-start text-white rounded" style={{ backgroundColor: '#45526e' }}>
-        <div className="container pb-0">
-            <hr />
-          <section className="p-3 pt-0">
-            <div className="row d-flex align-items-center">
-              {/* Grid column */}
-              <div className="col-md-7 col-lg-8 text-center text-md-start">
-                {/* Copyright */}
-                <div className="p-2" style={{ fontSize: "15px" }}>
-                  Made with &hearts; by Jagdamba Tripathi
-                </div>
-              </div>
-              <div className="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
-                <a className="btn btn-outline-light btn-floating m-1 text-white" role="button" href='https://www.linkedin.com/in/jagdamba-tripathi/' target="_blank">
-                  <i className="fab fa-linkedin"></i>
-                </a>
-                <a className="btn btn-outline-light btn-floating m-1 text-white" role="button" href=''>
-                  <i class="fa-brands fa-telegram"></i>
-                </a>
-                <a className="btn btn-outline-light btn-floating m-1 text-white" role="button">
-                  <i className="fab fa-google"></i>
-                </a>
-                <a className="btn btn-outline-light btn-floating m-1 text-white" role="button">
-                  <i className="fab fa-instagram"></i>
-                </a>
-              </div>
-            </div>
-          </section>
+    <footer className="footer">
+      <div className="footer-content">
+        <div className="footer-section">
+          <h4>About TravelKro</h4>
+          <p>Your trusted partner for seamless travel experiences. We offer the best deals on flights, hotels, and car rentals worldwide.</p>
+          <div className="social-links">
+            <a href="#" className="social-link"><FaFacebook /></a>
+            <a href="#" className="social-link"><FaTwitter /></a>
+            <a href="#" className="social-link"><FaInstagram /></a>
+            <a href="#" className="social-link"><FaLinkedin /></a>
+          </div>
         </div>
-      </footer>
-    </div>
-    );
-  }
+
+        <div className="footer-section">
+          <h4>Quick Links</h4>
+          <ul className="footer-links">
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/about">About Us</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/profile">My Profile</Link></li>
+          </ul>
+        </div>
+
+        <div className="footer-section">
+          <h4>Services</h4>
+          <ul className="footer-links">
+            <li><Link to="/">Flights</Link></li>
+            <li><Link to="/">Hotels</Link></li>
+            <li><Link to="/">Car Rentals</Link></li>
+            <li><Link to="/">Travel Insurance</Link></li>
+          </ul>
+        </div>
+
+        <div className="footer-section">
+          <h4>Contact Us</h4>
+          <ul className="contact-info">
+            <li>
+              <FaPhone className="contact-icon" />
+              <span>+91 9876543210</span>
+            </li>
+            <li>
+              <FaEnvelope className="contact-icon" />
+              <span>jagdtri2003@gmail.com</span>
+            </li>
+            <li>
+              <FaMapMarkerAlt className="contact-icon" />
+              <span>Prayagraj, Uttar Pradesh, India</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="footer-bottom">
+        <div className="container">
+          <p>&copy; {new Date().getFullYear()} TravelKro. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  );
+}

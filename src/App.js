@@ -1,16 +1,16 @@
 import './App.css';
 import MainCard from './components/MainCard';
 import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Route, Routes,Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import About from './components/About';
 import ContactUs from './components/ContactUs';
 import Footer from './components/Footer';
 // import '@fortawesome/fontawesome-free/css/all.min.css';
-import {auth} from './components/Firebase';
+import { auth } from './components/Firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-import React,{useEffect,useState} from 'react';
-import Signup from './components/Signup';
+import React, { useEffect, useState } from 'react';
 import Login from './components/Login';
+import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword';
 import Profile from './components/Profile';
 
@@ -22,14 +22,13 @@ function App() {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       if (authUser) {
         setUser(authUser);
-        localStorage.setItem("displayName",authUser.displayName);
+        localStorage.setItem("displayName", authUser.displayName);
       } else {
         setUser(null);
       }
       setInterval(() => {
         setLoading(false);
-      },250);
-  
+      }, 250);
     });
 
     return () => unsubscribe();
@@ -38,10 +37,10 @@ function App() {
 
   if (loading) {
     // Render a loading indicator while checking authentication state
-    return(
+    return (
       <div className='centered-container'>
-        <div class="spinner-7"></div>
-      </div>  
+        <div className="spinner-7"></div>
+      </div>
     );
   }
 
@@ -50,17 +49,17 @@ function App() {
       <>
         <Navbar title="TravelKro" />
         <div className="container my-4" id="mainContainer">
-        <Routes>
-          <Route path="/" element={user ? <MainCard user={user}/> : <Navigate to="/signup" />} />
-          <Route path='/signup' element={<Signup/>}/>
-          <Route path="/login" element={<Login />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<ContactUs />} />
-          <Route exact path="/forgot-password" element={<ForgotPassword/>} />
-          <Route path='/profile' element={<Profile/>}/>
-        </Routes>
+          <Routes>
+            <Route path="/" element={user ? <MainCard user={user} /> : <Navigate to="/login" />} />
+            <Route path='/register' element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route exact path="/forgot-password" element={<ForgotPassword />} />
+            <Route path='/profile' element={<Profile />} />
+          </Routes>
         </div>
-        <Footer/>
+        <Footer />
       </>
     </Router>
   );

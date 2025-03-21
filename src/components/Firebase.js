@@ -1,24 +1,27 @@
 import React from 'react'
 import { initializeApp } from "firebase/app";
-import { browserLocalPersistence, getAuth,setPersistence} from "firebase/auth";
-import {getFirestore} from "firebase/firestore";
+import { browserLocalPersistence, getAuth, setPersistence } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
+// Firebase configuration
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_API_KEY || "YOUR_API_KEY",
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN || "your-app.firebaseapp.com",
+  projectId: process.env.REACT_APP_PROJECT_ID || "your-app-id",
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET || "your-app.appspot.com",
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID || "your-messaging-sender-id",
+  appId: process.env.REACT_APP_APP_ID || "your-app-id"
+};
 
-    const firebaseConfig = {
-      apiKey:process.env.REACT_APP_API_KEY,
-      authDomain:process.env.REACT_APP_AUTH_DOMAIN,
-      projectId:process.env.REACT_APP_PROJECT_ID,
-      storageBucket:process.env.REACT_APP_STORAGE_BUCKET,
-      messagingSenderId:process.env.REACT_APP_MESSAGING_SENDER_ID,
-      appId:process.env.REACT_APP_APP_ID,
-    };
-      
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const auth=getAuth(app);
-      const db = getFirestore(app);
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
-      // Enable persistence
-      setPersistence(auth,browserLocalPersistence);
+// Initialize Firebase Authentication and get a reference to the service
+const auth = getAuth(app);
 
-      export {app,auth,db};
+// Enable persistence
+setPersistence(auth, browserLocalPersistence);
+
+const db = getFirestore(app);
+
+export { app, auth, db };

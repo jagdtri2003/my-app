@@ -1,45 +1,75 @@
 import React from 'react';
+import { FaCode, FaHeart, FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
 export default function About() {
-  document.title="TravelKro-About Us";
   return (
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col-lg-6">
-          <h2>About Us</h2>
-          <p>
-            Welcome to TravelKro, your ultimate travel companion! We are passionate about helping you discover the world's most amazing destinations.
-          </p>
-          <p>
-            Our team of travel enthusiasts works tirelessly to provide you with the best travel tips, guides, and resources to make your journeys unforgettable.
-          </p>
-        </div>
-        <div className="col-lg-6">
-          <img
-            src="https://p7.hiclipart.com/preview/102/609/191/package-tour-flight-travel-website-vacation-travel.jpg"
-            alt="About Us"
-            className="img-fluid rounded"
-            height="400px" width="400px"
-          />
-        </div>
+    <div className="about-container fade-in">
+      <div className="about-header">
+        <h1>About TravelKro</h1>
+        <p>Your one-stop destination for seamless travel planning</p>
       </div>
-      <div className="row mt-4">
-        <div className="col">
-          <h3>Our Mission</h3>
+
+      <div className="about-content">
+        <div className="about-section">
+          <h2>Our Mission</h2>
           <p>
-            At TravelKro, our mission is to inspire and empower travelers to explore new horizons, experience diverse cultures, and create lasting memories.
+            TravelKro aims to make travel planning easier and more accessible for everyone.
+            We provide a comprehensive platform for booking flights, hotels, and car rentals
+            while ensuring the best deals and user experience.
           </p>
         </div>
-      </div>
-      <div className="row mt-4">
-        <div className="col">
-          <h3>Why Choose Us?</h3>
-          <p>
-            With our extensive travel guides, insider tips, and curated recommendations, you can plan your dream vacation with confidence and ease.
-          </p>
-          <p>
-            Join our community of passionate travelers and embark on a journey of discovery and adventure with TravelKro!
-          </p>
+
+        <div className="about-section">
+          <h2>Why Choose Us?</h2>
+          <div className="features-grid">
+            <div className="feature-item">
+              <FaCode className="feature-icon" />
+              <h3>Modern Technology</h3>
+              <p>Built with cutting-edge web technologies for a smooth experience</p>
+            </div>
+            <div className="feature-item">
+              <FaHeart className="feature-icon" />
+              <h3>User-First Approach</h3>
+              <p>Designed with user experience and satisfaction in mind</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="developer-section">
+          <h2>Meet the Developer</h2>
+          <div className="developer-card">
+            <div className="developer-info">
+              <h3>Jagdamba Tripathi</h3>
+              <p className="developer-title">Full Stack Developer</p>
+              <p className="developer-bio">
+                A passionate developer dedicated to creating innovative web solutions.
+                Specializing in React, Node.js, and modern web technologies.
+              </p>
+            </div>
+            <div className="developer-social">
+              <a href="https://github.com/jagdtri2003" target="_blank" rel="noopener noreferrer" className="social-link">
+                <FaGithub /> GitHub
+              </a>
+              <a href="https://www.linkedin.com/in/jagdamba-tripathi/" target="_blank" rel="noopener noreferrer" className="social-link">
+                <FaLinkedin /> LinkedIn
+              </a>
+              <a href="mailto:jagdtri2003@gmail.com" className="social-link">
+                <FaEnvelope /> Email
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="tech-stack">
+          <h2>Technologies Used</h2>
+          <div className="tech-grid">
+            <div className="tech-item">React.js</div>
+            <div className="tech-item">Firebase</div>
+            <div className="tech-item">Bootstrap</div>
+            <div className="tech-item">React Router</div>
+            <div className="tech-item">CSS3</div>
+            <div className="tech-item">JavaScript</div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,48 +1,193 @@
-import React from 'react'
-import Flights from './Flights'
-import Hotel from './Hotel'
-import { Container } from 'react-bootstrap';
-import { signOut } from 'firebase/auth';
-import { auth } from './Firebase';
+import React, { useState } from 'react';
+import Flights from './Flights';
+import Hotel from './Hotel';
+import {Row, Col, Card, Button } from 'react-bootstrap';
 import VerifyEmail from './VerifyEmail';
+import { FaPlane, FaHotel, FaCar, FaMapMarkedAlt, FaCalendarAlt, FaUserCircle, FaSearch, FaGlobe, FaStar, FaHandshake, FaHeadset } from 'react-icons/fa';
 
 export default function MainCard({user}) {
+  const [activeTab, setActiveTab] = useState('flights');
+  const [showWelcome, setShowWelcome] = useState(true);
 
-  const SignOut =()=>{
-    signOut(auth);
-  }
-
-  document.title="TravelKro";
-  let displayName=user.displayName;
+  document.title = "TravelKro";
+  let displayName = user.displayName;
   const savedDisplayName = localStorage.getItem('displayName');
   if (savedDisplayName) {
-    displayName=savedDisplayName;
+    displayName = savedDisplayName;
   }
+
+  const renderTabContent = () => {
+    switch(activeTab) {
+      case 'flights':
+        return <Flights />;
+      case 'hotels':
+        return <Hotel />;
+      case 'cars':
+        return (
+          <div className="coming-soon-container">
+            <h2>Car Rental Service Coming Soon</h2>
+            <p>We're working on bringing you the best car rental deals!</p>
+          </div>
+        );
+      default:
+        return <Flights />;
+    }
+  };
+
   return (
-    <>
-    {displayName && <p>Welcome, <b>{displayName} ! &nbsp;</b> <i class="fa-solid fa-right-from-bracket" title='Signout' style={{color:'red'}} onClick={SignOut}></i></p>}
-    {user.emailVerified ? <div>
-      <ul className="nav nav-tabs" id="myTab" role="tablist">
-      <li className="nav-item" role="presentation">
-          <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><i class="fa-solid fa-plane-up"></i> Flights</button>
-      </li>
-      <li className="nav-item" role="presentation">
-          <button className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><i class="fa-solid fa-hotel"></i> Hotels</button>
-      </li>
-      <li className="nav-item" role="presentation">
-          <button className="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false"><i class="fa-solid fa-car"></i> Car Rent</button>
-      </li>
-      </ul>
-      <div className="tab-content my-2" id="myTabContent">
-      <div className="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabIndex="0"><Flights/></div>
-      <div className="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabIndex="0">{<Hotel/>}</div>
-      <div className="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" style={{ minHeight: '65vh' }} tabIndex="0">    <Container fluid className="p-0 flex-grow-1">
-        {/* No content inside */}
-        <h3>Coming Soon...</h3>
-      </Container></div>
-      </div>
+    <div className="main-container fade-in">
+      {displayName && showWelcome && (
+        <div className="welcome-banner">
+          <div className="welcome-content">
+            <FaUserCircle className="welcome-icon" />
+            <div className="welcome-text">
+              <h3>Welcome back, {displayName}!</h3>
+              <p>Ready to plan your next adventure?</p>
+            </div>
+            <Button 
+              variant="outline-light" 
+              className="close-welcome"
+              onClick={() => setShowWelcome(false)}
+            >
+              ×
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {user.emailVerified ? (
+        <>
+          {/* Hero Section */}
+          <div className="hero-section">
+            <div className="hero-content">
+              <h1>Discover Your Dream Destinations</h1>
+              <p>Experience the world with comfortable stays and memorable journeys</p>
+              <div className="hero-search">
+                <div className="search-box">
+                  <FaSearch className="search-icon" />
+                  <input type="text" placeholder="Search destinations, hotels, flights..." />
+                </div>
+                <button className="btn-custom search-button">Search</button>
+              </div>
+            </div>
+          </div>
+
+          {/* Features Section */}
+          <div className="features-section">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-3 col-sm-6 mb-4">
+                  <div className="feature-card">
+                    <FaGlobe className="feature-icon" />
+                    <h4>Global Coverage</h4>
+                    <p>Explore destinations worldwide with our extensive network of partners</p>
+                  </div>
+                </div>
+                <div className="col-md-3 col-sm-6 mb-4">
+                  <div className="feature-card">
+                    <FaStar className="feature-icon" />
+                    <h4>Best Deals</h4>
+                    <p>Get exclusive offers and discounts on hotels and flights</p>
+                  </div>
+                </div>
+                <div className="col-md-3 col-sm-6 mb-4">
+                  <div className="feature-card">
+                    <FaHandshake className="feature-icon" />
+                    <h4>Trusted Partners</h4>
+                    <p>We work with reliable partners to ensure a quality experience</p>
+                  </div>
+                </div>
+                <div className="col-md-3 col-sm-6 mb-4">
+                  <div className="feature-card">
+                    <FaHeadset className="feature-icon" />
+                    <h4>24/7 Support</h4>
+                    <p>Our customer support team is available around the clock</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          {/* Main Booking Section */}
+          <div className="booking-container">
+            <div className="booking-tabs">
+              <button 
+                className={`tab-button ${activeTab === 'flights' ? 'active' : ''}`}
+                onClick={() => setActiveTab('flights')}
+              >
+                <FaPlane className="tab-icon" />
+                <span>Flights</span>
+              </button>
+              <button 
+                className={`tab-button ${activeTab === 'hotels' ? 'active' : ''}`}
+                onClick={() => setActiveTab('hotels')}
+              >
+                <FaHotel className="tab-icon" />
+                <span>Hotels</span>
+              </button>
+              <button 
+                className={`tab-button ${activeTab === 'cars' ? 'active' : ''}`}
+                onClick={() => setActiveTab('cars')}
+              >
+                <FaCar className="tab-icon" />
+                <span>Cars</span>
+              </button>
+            </div>
+
+            <div className="tab-content">
+              {renderTabContent()}
+            </div>
+
+            <div className="quick-actions">
+              <Row className="g-4">
+                <Col md={4}>
+                  <Card className="quick-action-card">
+                    <Card.Body>
+                      <FaMapMarkedAlt className="action-icon" />
+                      <h5>Popular Destinations</h5>
+                      <p>Explore trending travel spots</p>
+                    </Card.Body>
+                  </Card>
+                </Col>
+                <Col md={4}>
+                  <Card className="quick-action-card">
+                    <Card.Body>
+                      <FaCalendarAlt className="action-icon" />
+                      <h5>Special Deals</h5>
+                      <p>Limited time offers</p>
+                    </Card.Body>
+                  </Card>
+                </Col>
+                <Col md={4}>
+                  <Card className="quick-action-card">
+                    <Card.Body>
+                      <FaUserCircle className="action-icon" />
+                      <h5>Travel Tips</h5>
+                      <p>Expert travel advice</p>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
+            </div>
+          </div>
+
+
+          {/* Newsletter Section */}
+          <div className="newsletter-section">
+            <div className="newsletter-content">
+              <h3>Subscribe to Our Newsletter</h3>
+              <p>Get the latest travel deals, offers, and tips straight to your inbox.</p>
+              <div className="newsletter-form">
+                <input type="email" placeholder="Enter your email address" />
+                <button className="btn-custom">Subscribe</button>
+              </div>
+            </div>
+          </div>
+        </>
+      ) : (
+        <VerifyEmail user={user} />
+      )}
     </div>
-    :<VerifyEmail user={user}/>}
-    </>
-  )
+  );
 }

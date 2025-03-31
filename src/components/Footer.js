@@ -32,8 +32,6 @@ export default function Footer() {
           <ul className="footer-links">
             <li><Link to="/">Flights</Link></li>
             <li><Link to="/">Hotels</Link></li>
-            <li><Link to="/">Car Rentals</Link></li>
-            <li><Link to="/">Travel Insurance</Link></li>
           </ul>
         </div>
 

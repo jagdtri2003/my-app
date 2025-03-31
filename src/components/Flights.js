@@ -20,7 +20,7 @@ export default function Flights() {
     try {
       setSearching(true);
       const response = await fetch(
-        `https://script.google.com/macros/s/AKfycbye6Yi_bm6nPVgZMe3q8zS4gq2LNSuaVgZyNjQ6z3vQl5HjjrMCYHYSqxqsXFnms587mg/exec?frm=${departureCity}&to=${destinationCity}`
+        `https://script.google.com/macros/s/AKfycbwUeDuQtdUNdAqJTMTADiu9doC9OJToM2xD5KWxXezd3_rE-TQnF9QuppO6_fi_7B8J4A/exec?frm=${departureCity}&to=${destinationCity}`
       );
       const data = await response.json();
       setFlights(data.data);
@@ -74,7 +74,9 @@ export default function Flights() {
                 <div class="form-row">
                     <div class="mr-2 mb-3">
                         <label for="inputDepartureDate">Departure Date</label>
-                        <input type="date" class="form-control" id="inputDepartureDate" required/>
+                        <input type="date" class="form-control" id="inputDepartureDate"
+                        min={new Date().toLocaleDateString('en-CA')}
+                        required/>
                     </div>
                 </div>
                 <div class="form-row">

@@ -120,6 +120,7 @@ export default function Hotel() {
               id="inputCheckInDate"
               value={checkInDate}
               onChange={handleCheckInDateChange}
+              min={new Date().toLocaleDateString('en-CA')}
               required
             />
           </div>

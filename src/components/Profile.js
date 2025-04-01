@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { auth } from './Firebase';
+import React, { useState, useEffect } from 'react';
+import { auth, db } from './Firebase';
 import { updateProfile, signOut } from 'firebase/auth';
-import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaEdit, FaSave, FaTimes, FaSignOutAlt } from 'react-icons/fa';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaEdit, FaSave, FaTimes, FaSignOutAlt, FaPlane, FaHotel, FaCalendarAlt, FaClock, FaTicketAlt, FaCreditCard, FaUserTie, FaMapMarkedAlt, FaBed, FaTimesCircle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 export default function Profile() {
@@ -10,7 +11,57 @@ export default function Profile() {
   const [phone, setPhone] = useState('');
   const [location, setLocation] = useState('');
   const [bio, setBio] = useState('Travel enthusiast exploring the world one destination at a time.');
+  const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedBooking, setSelectedBooking] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchBookings();
+  }, []);
+
+  const fetchBookings = async () => {
+    try {
+      const userId = auth.currentUser?.uid;
+      if (!userId) return;
+
+      // Fetch flight bookings
+      const flightBookingsQuery = query(
+        collection(db, 'flights'),
+        where('userEmail', '==', auth.currentUser.email)
+      );
+      const flightBookingsSnapshot = await getDocs(flightBookingsQuery);
+      const flightBookings = flightBookingsSnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+        type: 'flight'
+      }));
+
+      // Fetch hotel bookings
+      const hotelBookingsQuery = query(
+        collection(db, 'hotels'),
+        where('userEmail', '==', auth.currentUser.email)
+      );
+      const hotelBookingsSnapshot = await getDocs(hotelBookingsQuery);
+      const hotelBookings = hotelBookingsSnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+        type: 'hotel'
+      }));
+
+      // Combine and sort bookings by date
+      const allBookings = [...flightBookings, ...hotelBookings].sort((a, b) => 
+        new Date(b.bookingDate) - new Date(a.bookingDate)
+      );
+
+      setBookings(allBookings);
+    } catch (error) {
+      console.error('Error fetching bookings:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleUpdateProfile = async () => {
     try {
@@ -31,6 +82,32 @@ export default function Profile() {
     } catch (error) {
       console.error('Error signing out:', error);
     }
+  };
+
+  const handleBookingClick = (booking) => {
+    setSelectedBooking(booking);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedBooking(null);
+  };
+
+  const formatCurrency = (amount) => {
+    return `₹${amount.toLocaleString('en-IN')}`;
+  };
+
+  const formatDate = (timestamp) => {
+    const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+    return date.toLocaleString('en-IN', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+    });
   };
 
   return (
@@ -146,6 +223,68 @@ export default function Profile() {
           </div>
         </div>
 
+        <div className="profile-section">
+          <h3>Booking History</h3>
+          {loading ? (
+            <div className="loading">Loading bookings...</div>
+          ) : bookings.length === 0 ? (
+            <div className="no-bookings">
+              <p>No bookings found. Start exploring and book your next adventure!</p>
+            </div>
+          ) : (
+            <div className="booking-history">
+              {bookings.map((booking) => (
+                <div 
+                  key={booking.id} 
+                  className="booking-card"
+                  onClick={() => handleBookingClick(booking)}
+                >
+                  <div className="booking-icon">
+                    {booking.type === 'flight' ? <FaPlane /> : <FaHotel />}
+                  </div>
+                  <div className="booking-details">
+                    <div className="booking-header">
+                      <h4>{booking.type === 'flight' ? 'Flight Booking' : 'Hotel Booking'}</h4>
+                      <span className={`status-${booking.paymentStatus?.toLowerCase()}`}>
+                        {booking.paymentStatus?.toUpperCase()}
+                      </span>
+                    </div>
+                    <p className="booking-date">
+                      <FaCalendarAlt /> {formatDate(booking.bookingTime)}
+                    </p>
+                    {booking.type === 'flight' ? (
+                      <div className="booking-summary">
+                        <div className="route-summary">
+                          <span>{booking.departureCity}</span>
+                          <FaPlane className="route-icon" />
+                          <span>{booking.arrivalCity}</span>
+                        </div>
+                        <p className="flight-info">
+                          {booking.flightName} - {booking.flightNumber} • {booking.cabinClass}
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="booking-summary">
+                        <p className="hotel-name">{booking.hotelName}</p>
+                        <p className="hotel-location">
+                          <FaMapMarkerAlt /> {booking.hotelLocation}
+                        </p>
+                        <p className="stay-duration">
+                          {booking.days} days • {booking.numberOfRoom} {booking.numberOfRoom > 1 ? 'rooms' : 'room'}
+                        </p>
+                      </div>
+                    )}
+                    <div className="booking-footer">
+                      <span className="booking-amount">{formatCurrency(booking.totalPrice)}</span>
+                      <span className="view-details">View Details →</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
         <div className="profile-stats">
           <div className="stat-card">
             <h4>Bookings</h4>
@@ -161,6 +300,142 @@ export default function Profile() {
           </div>
         </div>
       </div>
+
+      {/* Booking Details Modal */}
+      {showModal && selectedBooking && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <button className="modal-close" onClick={closeModal}>
+              <FaTimesCircle />
+            </button>
+            
+            <div className="modal-header">
+              <div className="modal-icon">
+                {selectedBooking.type === 'flight' ? <FaPlane /> : <FaHotel />}
+              </div>
+              <div className="modal-title">
+                <h2>{selectedBooking.type === 'flight' ? 'Flight Booking Details' : 'Hotel Booking Details'}</h2>
+                <span className={`status-${selectedBooking.paymentStatus.toLowerCase()}`}>
+                  {selectedBooking.paymentStatus}
+                </span>
+              </div>
+            </div>
+
+            <div className="modal-body">
+              {selectedBooking.type === 'flight' ? (
+                <div className="flight-details-modal">
+                  <div className="route-info">
+                    <div className="departure">
+                      <h3>{selectedBooking.departureCity}</h3>
+                      <p>{selectedBooking.departureTime}</p>
+                    </div>
+                    <div className="route-line">
+                      <FaPlane className="plane-icon" />
+                    </div>
+                    <div className="arrival">
+                      <h3>{selectedBooking.arrivalCity}</h3>
+                      <p>{selectedBooking.arrivalTime}</p>
+                    </div>
+                  </div>
+
+                  <div className="booking-info-grid">
+                    <div className="info-item">
+                      <FaTicketAlt className="info-icon" />
+                      <div>
+                        <label>Booking ID</label>
+                        <p>{selectedBooking.referenceId}</p>
+                      </div>
+                    </div>
+                    <div className="info-item">
+                      <FaPlane className="info-icon" />
+                      <div>
+                        <label>Flight</label>
+                        <p>{selectedBooking.flightName} ({selectedBooking.flightNumber})</p>
+                      </div>
+                    </div>
+                    <div className="info-item">
+                      <FaUserTie className="info-icon" />
+                      <div>
+                        <label>Passengers</label>
+                        <p>{selectedBooking.passengerCount}</p>
+                      </div>
+                    </div>
+                    <div className="info-item">
+                      <FaClock className="info-icon" />
+                      <div>
+                        <label>Booking Date</label>
+                        <p>{formatDate(selectedBooking.bookingTime)}</p>
+                      </div>
+                    </div>
+                    <div className="info-item">
+                      <FaCreditCard className="info-icon" />
+                      <div>
+                        <label>Amount</label>
+                        <p>{formatCurrency(selectedBooking.totalPrice)}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="hotel-details-modal">
+                  <div className="hotel-header">
+                    <h3>{selectedBooking.hotelName}</h3>
+                    <div className="location">
+                      <FaMapMarkedAlt />
+                      <span>{selectedBooking.hotelLocation}</span>
+                    </div>
+                  </div>
+
+                  <div className="booking-info-grid">
+                    <div className="info-item">
+                      <FaTicketAlt className="info-icon" />
+                      <div>
+                        <label>Booking ID</label>
+                        <p>{selectedBooking.referenceId}</p>
+                      </div>
+                    </div>
+                    <div className="info-item">
+                      <FaBed className="info-icon" />
+                      <div>
+                        <label>Rooms</label>
+                        <p>{selectedBooking.numberOfRoom}</p>
+                      </div>
+                    </div>
+                    <div className="info-item">
+                      <FaClock className="info-icon" />
+                      <div>
+                        <label>Duration</label>
+                        <p>{selectedBooking.days} days</p>
+                      </div>
+                    </div>
+                    <div className="info-item">
+                      <FaCalendarAlt className="info-icon" />
+                      <div>
+                        <label>Check-in</label>
+                        <p>{formatDate(selectedBooking.from)}</p>
+                      </div>
+                    </div>
+                    <div className="info-item">
+                      <FaCalendarAlt className="info-icon" />
+                      <div>
+                        <label>Check-out</label>
+                        <p>{formatDate(selectedBooking.to)}</p>
+                      </div>
+                    </div>
+                    <div className="info-item">
+                      <FaCreditCard className="info-icon" />
+                      <div>
+                        <label>Amount</label>
+                        <p>{formatCurrency(selectedBooking.totalPrice)}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

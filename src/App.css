@@ -25,6 +25,7 @@
   border-radius: 1rem;
   margin-bottom: 2rem;
   box-shadow: var(--shadow);
+  position: relative;
 }
 
 .welcome-content {
@@ -302,12 +303,16 @@
     flex-direction: column;
     text-align: center;
     gap: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
   }
 
   .close-welcome {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 0.75rem;
+    right: 0.75rem;
+    margin-left: 0;
+    z-index: 5;
   }
 }
 
@@ -801,6 +806,7 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .stat-card {
@@ -2247,7 +2253,7 @@
 }
 
 .btn-cancel-booking:hover {
-  background: #dc3545;
+  background-color: #ef4444;
   color: white;
 }
 
@@ -2505,4 +2511,181 @@
   gap: 8px;
   color: #666;
   margin-top: 10px;
+}
+
+/* Cancellation Styles */
+.cancellation-confirm {
+  max-width: 500px;
+}
+
+.cancellation-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.warning-icon {
+  font-size: 2rem;
+  color: #f59e0b;
+}
+
+.cancellation-header h3 {
+  margin: 0;
+  color: var(--text-color);
+}
+
+.cancellation-body {
+  padding: 1.5rem;
+}
+
+.cancellation-fees {
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.fee-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+}
+
+.fee-item:not(:last-child) {
+  border-bottom: 1px dashed #e5e7eb;
+}
+
+.fee-item.refund {
+  font-weight: 600;
+  color: #10b981;
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.disclaimer {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.cancellation-actions {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.btn-proceed, .btn-back {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-proceed {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+}
+
+.btn-proceed:hover:not(:disabled) {
+  background-color: #dc2626;
+}
+
+.btn-back {
+  background-color: white;
+  color: #6b7280;
+  border: 1px solid #e5e7eb;
+}
+
+.btn-back:hover:not(:disabled) {
+  background-color: #f9fafb;
+}
+
+.btn-proceed:disabled, .btn-back:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.cancellation-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.success-icon {
+  width: 4rem;
+  height: 4rem;
+  background-color: #10b981;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.cancellation-success h3 {
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.cancellation-success p {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+}
+
+.cancellation-details {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 350px;
+  gap: 0.5rem;
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.cancellation-details span {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-cancel-booking {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: white;
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+}
+
+.btn-cancel-booking:hover {
+  background-color: #ef4444;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .cancellation-actions {
+    flex-direction: column;
+  }
 }

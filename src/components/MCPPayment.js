@@ -137,19 +137,9 @@ export default function MCP_Payment() {
     setIsProcessing(true);
     setError('');
 
-    const response = await fetch("https://script.google.com/macros/s/AKfycbyQMxnOH99tiCEfAxexH_7XJ41LqBEueLKKd7ghlWRgYzyHuB_N-WvPEBdb2pWxmAMtrA/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        action: "updatePayment",
-        RefId: decryptedReferenceId,
-        PaymentStatus: "PAID"
-      })
-    })
+    const response = await fetch(`https://script.google.com/macros/s/AKfycbxUE0GQHpLdGtuqG6qjV6o9K7DpU1dL9UqC3pyUYLDKVFGSxC__aln46i7qxSsj1qiwCw/exec?action=put&refId=${decryptedReferenceId}`)
     const data = await response.json();
-    if (data.success) {
+    if (data.message == "Payment status updated") {
       setPaymentSuccess(true);
       setIsProcessing(false);
     } else {

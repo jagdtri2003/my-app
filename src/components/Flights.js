@@ -20,7 +20,7 @@ export default function Flights() {
     try {
       setSearching(true);
       const response = await fetch(
-        `https://script.google.com/macros/s/AKfycbwUeDuQtdUNdAqJTMTADiu9doC9OJToM2xD5KWxXezd3_rE-TQnF9QuppO6_fi_7B8J4A/exec?frm=${departureCity}&to=${destinationCity}`
+        `https://script.google.com/macros/s/AKfycbwamj0Wcf37F6aVsdu8kuZeij-oWoPWlr667ggmPGTsLIpAfX6Q22utMBeqhPosaBilJg/exec?frm=${departureCity}&to=${destinationCity}`
       );
       const data = await response.json();
       setFlights(data.data);

@@ -13,6 +13,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword';
 import Profile from './components/Profile';
+import Payment from './components/MCPPayment';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -57,6 +58,7 @@ function App() {
             <Route path="/contact" element={<ContactUs />} />
             <Route exact path="/forgot-password" element={<ForgotPassword />} />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/payment' element={<Payment />} />
           </Routes>
         </div>
         <Footer />

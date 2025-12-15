@@ -42,15 +42,21 @@ export default function MCP_Payment() {
     const encryptedRefId = searchParams.get('referenceId');
     const encryptedAmount = searchParams.get('amount');
 
-    if (encryptedRefId && encryptedAmount && !isNaN(encryptedAmount)) {
+
+    if (encryptedRefId && encryptedAmount) {
       
       // Decrypt the values
       try {
         const decryptedRef = decrypt(encryptedRefId);
         const decryptedAmt = decrypt(encryptedAmount);
-        
+        if (!isNaN(decryptedAmt)) {
         setDecryptedReferenceId(decryptedRef);
-        setDecryptedAmount(decryptedAmt);
+          setDecryptedAmount(decryptedAmt);
+        } else {
+          setError('Invalid Payment Link.Please try again later.');
+          setDecryptedReferenceId('N/A');
+          setDecryptedAmount('N/A');
+        }
       } catch (err) {
         setError('Invalid Payment Link.Please try again later.');
         console.error('Decryption error:', err);

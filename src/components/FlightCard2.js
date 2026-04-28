@@ -254,7 +254,8 @@ export default function FlightCard2({ flight, passengerCount, paymentStatus, set
         const response = await fetch('https://server-travelkro.vercel.app/flight', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'access-key': process.env.REACT_APP_ACCESS_KEY
           },
           body: JSON.stringify(bookingData)
         });

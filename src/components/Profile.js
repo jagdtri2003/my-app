@@ -239,6 +239,7 @@ export default function Profile() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'access-key': process.env.REACT_APP_ACCESS_KEY
         },
         body: JSON.stringify(payload)
       });

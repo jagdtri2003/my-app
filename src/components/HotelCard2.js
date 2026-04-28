@@ -87,7 +87,8 @@ export default function HotelCard2({ hotel, checkInDate, checkOutDate, paymentSt
             const response = await fetch('https://server-travelkro.vercel.app/hotel', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'access-key': process.env.REACT_APP_ACCESS_KEY
                 },
                 body: JSON.stringify(bookingData)
             });
